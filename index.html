@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kartu Rumus Fisika Teknik — UTS</title>
-
-<!-- MathJax untuk render rumus matematika -->
+<title>Fisika Teknik — Pusat Materi 1 Semester</title>
 <script>
 window.MathJax = {
   tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
@@ -15,599 +13,1557 @@ window.MathJax = {
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-  :root {
-    --bg: #f4f6fb; --card-bg: #fff; --text: #1f2937;
-    --muted: #6b7280; --border: #e5e7eb; --accent: #3b82f6;
-    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+:root {
+  --bg: #f4f6fb; --card-bg: #ffffff; --text: #1f2937;
+  --muted: #6b7280; --border: #e5e7eb; --accent: #3b82f6;
+  --accent-2: #8b5cf6; --success: #10b981; --warning: #f59e0b;
+  --danger: #ef4444; --shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+body.dark {
+  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
+  --muted: #94a3b8; --border: #334155; --accent: #60a5fa;
+  --accent-2: #a78bfa;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.65;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* LAYOUT */
+.layout { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 280px; background: var(--card-bg);
+  border-right: 1px solid var(--border);
+  padding: 20px 0; position: fixed; top: 0; bottom: 0;
+  overflow-y: auto; transition: transform 0.3s; z-index: 200;
+}
+.sidebar-header {
+  padding: 0 20px 20px; border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.sidebar-header h2 { font-size: 1.05rem; color: var(--accent); margin-bottom: 4px; }
+.sidebar-header p { font-size: 0.75rem; color: var(--muted); }
+.nav-group { padding: 0 12px; margin-bottom: 8px; }
+.nav-group-title {
+  font-size: 0.75rem; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 7px 12px; font-size: 0.85rem;
+  color: var(--text); text-decoration: none;
+  border-radius: 6px; transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.nav-link:hover { background: var(--bg); border-left-color: var(--accent); }
+.nav-link.active {
+  background: var(--bg); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.nav-link.done::after {
+  content: " ✓"; color: var(--success); font-weight: bold;
+}
+.progress-bar {
+  margin: 12px 20px; padding: 12px; background: var(--bg);
+  border-radius: 8px; font-size: 0.8rem;
+}
+.progress-track {
+  height: 6px; background: var(--border); border-radius: 3px;
+  margin-top: 6px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.4s; width: 0%;
+}
+
+/* MAIN */
+.main { flex: 1; margin-left: 280px; min-width: 0; }
+
+/* TOPBAR */
+.topbar {
+  position: sticky; top: 0; z-index: 150;
+  background: var(--card-bg); padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+.menu-toggle {
+  display: none; background: var(--accent); color: #fff;
+  border: none; border-radius: 6px; padding: 8px 12px;
+  font-size: 1rem; cursor: pointer;
+}
+.search-box { flex: 1; min-width: 200px; position: relative; }
+.search-box input {
+  width: 100%; padding: 10px 40px 10px 16px;
+  border: 2px solid var(--border); border-radius: 25px;
+  background: var(--bg); color: var(--text); font-size: 0.9rem;
+  outline: none;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box::after {
+  content: "🔍"; position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%); opacity: 0.5;
+}
+.topbar-btn {
+  padding: 8px 14px; border: 2px solid var(--border);
+  background: var(--card-bg); color: var(--text);
+  border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+  font-weight: 500;
+}
+.topbar-btn:hover { border-color: var(--accent); }
+
+/* CONTENT */
+.content { max-width: 920px; margin: 0 auto; padding: 30px 24px 80px; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #fff; padding: 40px 30px; border-radius: 16px;
+  margin-bottom: 30px; text-align: center;
+}
+.hero h1 { font-size: 1.9rem; margin-bottom: 8px; }
+.hero p { opacity: 0.95; font-size: 0.98rem; }
+.hero-stats {
+  display: flex; gap: 20px; justify-content: center;
+  margin-top: 20px; flex-wrap: wrap;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.15); padding: 10px 18px;
+  border-radius: 10px; font-size: 0.85rem;
+}
+.hero-stat strong { display: block; font-size: 1.4rem; }
+
+/* SECTIONS */
+.section { margin-bottom: 50px; scroll-margin-top: 80px; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 12px; border-bottom: 3px solid var(--accent);
+  margin-bottom: 20px;
+}
+.section-header h2 { font-size: 1.5rem; }
+.section-num {
+  background: var(--accent); color: #fff;
+  min-width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.topic { margin-bottom: 32px; scroll-margin-top: 80px; }
+.topic-title {
+  font-size: 1.15rem; color: var(--accent); font-weight: 700;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.topic-title::before { content: "▸"; color: var(--accent-2); }
+
+/* CARDS */
+.card {
+  background: var(--card-bg); border-radius: 12px;
+  padding: 20px; box-shadow: var(--shadow);
+  border: 1px solid var(--border); margin-bottom: 14px;
+}
+.card h4 {
+  font-size: 0.95rem; color: var(--accent-2);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+}
+.theory { font-size: 0.92rem; color: var(--text); line-height: 1.7; }
+.theory p { margin-bottom: 10px; }
+.theory ul { margin: 10px 0 10px 20px; }
+.theory li { margin-bottom: 6px; }
+.theory code {
+  background: var(--bg); padding: 2px 6px; border-radius: 4px;
+  font-family: 'Courier New', monospace; font-size: 0.88rem;
+}
+.theory strong { color: var(--accent); }
+
+/* FORMULA BOX */
+.formula-box {
+  background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.06));
+  padding: 14px; border-radius: 8px;
+  border-left: 4px solid var(--accent); text-align: center;
+  margin: 10px 0; overflow-x: auto;
+}
+.formula-box .label {
+  font-size: 0.75rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 6px; display: block;
+}
+
+/* EXAMPLE */
+.example {
+  background: rgba(16,185,129,0.06);
+  border-left: 4px solid var(--success);
+  padding: 14px; border-radius: 8px; margin: 12px 0;
+}
+.example-title {
+  font-weight: 700; color: var(--success);
+  margin-bottom: 8px; font-size: 0.9rem;
+}
+.example .step {
+  background: var(--bg); padding: 8px 12px;
+  border-radius: 6px; margin: 6px 0;
+  font-family: 'Courier New', monospace; font-size: 0.87rem;
+}
+
+/* WARNING / TIP */
+.callout {
+  padding: 12px 14px; border-radius: 8px;
+  margin: 12px 0; font-size: 0.88rem;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.callout.tip {
+  background: rgba(245,158,11,0.1);
+  border-left: 4px solid var(--warning);
+}
+.callout.important {
+  background: rgba(239,68,68,0.08);
+  border-left: 4px solid var(--danger);
+}
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* QUIZ */
+.quiz {
+  background: var(--card-bg); border-radius: 12px;
+  padding: 20px; box-shadow: var(--shadow);
+  border: 1px solid var(--border); margin-top: 20px;
+}
+.quiz h4 {
+  color: var(--accent-2); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.quiz-question {
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.quiz-question:last-child { border-bottom: none; }
+.quiz-q-text {
+  font-weight: 600; font-size: 0.92rem; margin-bottom: 10px;
+}
+.quiz-option {
+  display: block; padding: 8px 12px; margin: 5px 0;
+  border: 2px solid var(--border); border-radius: 8px;
+  background: var(--card-bg); color: var(--text);
+  cursor: pointer; font-size: 0.88rem;
+  transition: all 0.15s;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+}
+.quiz-option:hover { border-color: var(--accent); }
+.quiz-option.correct {
+  background: rgba(16,185,129,0.15);
+  border-color: var(--success);
+}
+.quiz-option.wrong {
+  background: rgba(239,68,68,0.15);
+  border-color: var(--danger);
+}
+.quiz-feedback {
+  margin-top: 8px; font-size: 0.82rem;
+  color: var(--muted); font-style: italic;
+}
+
+/* PROGRESS CHECKBOX */
+.done-toggle {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 12px; padding: 8px 12px;
+  background: var(--bg); border-radius: 8px;
+  font-size: 0.85rem; cursor: pointer;
+  user-select: none; border: none; color: var(--text);
+  font-family: inherit;
+}
+.done-toggle:hover { background: rgba(59,130,246,0.08); }
+.done-toggle.checked {
+  background: rgba(16,185,129,0.12);
+  color: var(--success); font-weight: 600;
+}
+
+/* TABLE */
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 0.88rem;
+}
+th, td {
+  padding: 8px 12px; text-align: left;
+  border: 1px solid var(--border);
+}
+th { background: var(--bg); font-weight: 600; }
+tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+body.dark tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* CALCULATOR */
+.calculator {
+  background: var(--card-bg); border-radius: 12px;
+  padding: 18px; box-shadow: var(--shadow);
+  border: 2px solid var(--accent); margin: 16px 0;
+}
+.calculator h4 {
+  color: var(--accent); margin-bottom: 12px;
+}
+.calc-inputs {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; margin-bottom: 12px;
+}
+.calc-inputs label {
+  display: block; font-size: 0.78rem;
+  color: var(--muted); margin-bottom: 4px;
+}
+.calc-inputs input {
+  width: 100%; padding: 8px 10px;
+  border: 2px solid var(--border); border-radius: 6px;
+  background: var(--bg); color: var(--text); font-size: 0.9rem;
+  font-family: inherit;
+}
+.calc-inputs input:focus { border-color: var(--accent); outline: none; }
+.calc-btn {
+  background: var(--accent); color: #fff; border: none;
+  padding: 10px 20px; border-radius: 8px;
+  font-weight: 600; cursor: pointer; font-size: 0.9rem;
+}
+.calc-btn:hover { background: var(--accent-2); }
+.calc-result {
+  margin-top: 12px; padding: 12px;
+  background: var(--bg); border-radius: 8px;
+  font-family: 'Courier New', monospace; font-size: 0.95rem;
+  min-height: 42px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 30px 20px;
+  color: var(--muted); font-size: 0.82rem;
+  border-top: 1px solid var(--border); margin-top: 40px;
+}
+
+/* UTILITIES */
+.no-result {
+  text-align: center; padding: 40px;
+  color: var(--muted); font-size: 1.05rem;
+  display: none;
+}
+.hidden { display: none !important; }
+.highlight { background: rgba(245,158,11,0.3); padding: 0 2px; border-radius: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
   }
-  body.dark {
-    --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
-    --muted: #94a3b8; --border: #334155; --accent: #60a5fa;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6;
-    transition: background 0.3s, color 0.3s;
-  }
-  header {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: #fff; padding: 30px 20px; text-align: center;
-  }
-  header h1 { font-size: 1.8rem; margin-bottom: 6px; }
-  header p { opacity: 0.9; font-size: 0.95rem; }
-  .controls {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--card-bg); padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex; flex-wrap: wrap; gap: 10px;
-    align-items: center; justify-content: center;
-  }
-  .search-box { flex: 1 1 300px; max-width: 500px; position: relative; }
-  .search-box input {
-    width: 100%; padding: 10px 16px;
-    border: 2px solid var(--border); border-radius: 25px;
-    background: var(--bg); color: var(--text); font-size: 0.95rem;
-    outline: none;
-  }
-  .search-box input:focus { border-color: var(--accent); }
-  .filter-btn {
-    padding: 8px 14px; border: 2px solid var(--border);
-    background: var(--card-bg); color: var(--text);
-    border-radius: 20px; font-size: 0.85rem; cursor: pointer;
-    font-weight: 500;
-  }
-  .filter-btn.active {
-    background: var(--accent); color: #fff; border-color: var(--accent);
-  }
-  .dark-toggle {
-    padding: 8px 12px; border: 2px solid var(--border);
-    background: var(--card-bg); color: var(--text);
-    border-radius: 20px; cursor: pointer;
-  }
-  main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px; }
-  .chapter-title {
-    font-size: 1.4rem; font-weight: 700;
-    margin: 32px 0 16px; padding-bottom: 8px;
-    border-bottom: 3px solid var(--accent);
-  }
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 16px;
-  }
-  .card {
-    background: var(--card-bg); border-radius: 12px;
-    padding: 18px; box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    transition: transform 0.2s;
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .card:hover { transform: translateY(-3px); }
-  .card-header {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-weight: 600; font-size: 0.98rem;
-  }
-  .card-num {
-    background: var(--accent); color: #fff;
-    min-width: 28px; height: 28px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; flex-shrink: 0;
-  }
-  .card-formula {
-    background: var(--bg); padding: 12px;
-    border-radius: 8px; text-align: center;
-    font-size: 1.05rem; border-left: 4px solid var(--accent);
-    overflow-x: auto;
-  }
-  .card-desc { font-size: 0.88rem; color: var(--muted); }
-  .card-example {
-    background: rgba(139,92,246,0.08); padding: 10px 12px;
-    border-radius: 8px; font-size: 0.85rem;
-    border-left: 3px solid #8b5cf6;
-  }
-  .card-example summary {
-    font-weight: 600; color: var(--accent); cursor: pointer;
-  }
-  .card-example p { margin-top: 8px; }
-  .no-result { text-align: center; padding: 40px; color: var(--muted); }
-  footer {
-    text-align: center; padding: 30px 20px;
-    color: var(--muted); font-size: 0.85rem;
-    border-top: 1px solid var(--border);
-  }
-  .print-btn {
-    position: fixed; bottom: 20px; right: 20px;
-    padding: 12px 18px; background: var(--accent); color: #fff;
-    border: none; border-radius: 30px; cursor: pointer;
-    font-weight: 600; box-shadow: 0 4px 12px rgba(59,130,246,0.4);
-  }
-  @media (max-width: 600px) {
-    .cards-grid { grid-template-columns: 1fr; }
-    header h1 { font-size: 1.4rem; }
-  }
-  @media print {
-    header, .controls, .print-btn, footer { display: none; }
-    body { background: #fff; }
-    .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-  }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .menu-toggle { display: block; }
+  .content { padding: 20px 14px 60px; }
+  .hero { padding: 28px 18px; }
+  .hero h1 { font-size: 1.4rem; }
+}
+
+/* PRINT */
+@media print {
+  .sidebar, .topbar, .done-toggle, .quiz, .calculator,
+  .menu-toggle, footer { display: none !important; }
+  .main { margin-left: 0; }
+  .content { max-width: 100%; padding: 0; }
+  .section { page-break-inside: avoid; margin-bottom: 30px; }
+  .topic { page-break-inside: avoid; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+  body { background: #fff; color: #000; }
+  a { color: #000; text-decoration: none; }
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>📘 Kartu Rumus Fisika Teknik</h1>
-  <p>UTS — Besaran & Satuan • Vektor • Gerak Melingkar • Gelombang & Bunyi</p>
-</header>
+<div class="layout">
 
-<div class="controls">
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Cari rumus... (contoh: kecepatan, vektor, omega)">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fisika Teknik</h2>
+      <p>Pusat Materi 1 Semester</p>
+    </div>
+    <div class="progress-bar">
+      <div>Progress belajar: <strong id="progressText">0%</strong></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <nav>
+      <div class="nav-group">
+        <div class="nav-group-title">Bab 1 — Besaran & Satuan</div>
+        <a class="nav-link" href="#bab1-1" data-topic="bab1-1">1.1 Besaran Pokok & Turunan</a>
+        <a class="nav-link" href="#bab1-2" data-topic="bab1-2">1.2 Dimensi</a>
+        <a class="nav-link" href="#bab1-3" data-topic="bab1-3">1.3 Satuan & Konversi</a>
+        <a class="nav-link" href="#bab1-4" data-topic="bab1-4">1.4 Angka Penting</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Bab 2 — Vektor</div>
+        <a class="nav-link" href="#bab2-1" data-topic="bab2-1">2.1 Skalar vs Vektor</a>
+        <a class="nav-link" href="#bab2-2" data-topic="bab2-2">2.2 Penjumlahan Vektor</a>
+        <a class="nav-link" href="#bab2-3" data-topic="bab2-3">2.3 Komponen & Vektor Satuan</a>
+        <a class="nav-link" href="#bab2-4" data-topic="bab2-4">2.4 Dot Product</a>
+        <a class="nav-link" href="#bab2-5" data-topic="bab2-5">2.5 Cross Product</a>
+        <a class="nav-link" href="#bab2-6" data-topic="bab2-6">2.6 Aplikasi Vektor</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Bab 3 — Gerak Melingkar</div>
+        <a class="nav-link" href="#bab3-1" data-topic="bab3-1">3.1 Besaran Sudut</a>
+        <a class="nav-link" href="#bab3-2" data-topic="bab3-2">3.2 Kinematika Melingkar</a>
+        <a class="nav-link" href="#bab3-3" data-topic="bab3-3">3.3 Percepatan</a>
+        <a class="nav-link" href="#bab3-4" data-topic="bab3-4">3.4 Gaya Melingkar</a>
+        <a class="nav-link" href="#bab3-5" data-topic="bab3-5">3.5 Aplikasi</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Bab 4 — Gelombang & Bunyi</div>
+        <a class="nav-link" href="#bab4-1" data-topic="bab4-1">4.1 Definisi & Jenis</a>
+        <a class="nav-link" href="#bab4-2" data-topic="bab4-2">4.2 Besaran Gelombang</a>
+        <a class="nav-link" href="#bab4-3" data-topic="bab4-3">4.3 Persamaan Gelombang</a>
+        <a class="nav-link" href="#bab4-4" data-topic="bab4-4">4.4 Kecepatan Medium</a>
+        <a class="nav-link" href="#bab4-5" data-topic="bab4-5">4.5 Energi & Intensitas</a>
+        <a class="nav-link" href="#bab4-6" data-topic="bab4-6">4.6 Bunyi & Desibel</a>
+        <a class="nav-link" href="#bab4-7" data-topic="bab4-7">4.7 Efek Doppler</a>
+        <a class="nav-link" href="#bab4-8" data-topic="bab4-8">4.8 Huygens & USG</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="topbar">
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Cari materi... (contoh: kecepatan, vektor, omega)">
+      </div>
+      <button class="topbar-btn" id="darkToggle">🌙</button>
+      <button class="topbar-btn" onclick="window.print()">🖨️ Print</button>
+    </div>
+
+    <div class="content" id="content">
+
+      <!-- HERO -->
+      <div class="hero">
+        <h1>📘 Fisika Teknik — Pusat Materi</h1>
+        <p>Besaran & Satuan • Vektor • Gerak Melingkar • Gelombang & Bunyi</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>4</strong>Bab</div>
+          <div class="hero-stat"><strong>23</strong>Topik</div>
+          <div class="hero-stat"><strong>60+</strong>Rumus</div>
+          <div class="hero-stat"><strong>80+</strong>Contoh</div>
+        </div>
+      </div>
+
+      <div class="no-result" id="noResult">😕 Tidak ada materi yang cocok. Coba kata kunci lain.</div>
+
+      <!-- =================== BAB 1 =================== -->
+      <section class="section" data-bab="bab1">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <h2>Besaran & Satuan</h2>
+        </div>
+
+        <!-- 1.1 -->
+        <div class="topic" id="bab1-1" data-search="besaran pokok turunan satuan si dasar pengukuran">
+          <div class="topic-title">1.1 Besaran Pokok & Besaran Turunan</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Besaran</strong> adalah sesuatu yang dapat diukur dan dinyatakan dengan angka. Dalam fisika, besaran dibagi menjadi dua:</p>
+              <ul>
+                <li><strong>Besaran pokok</strong> — besaran dasar yang tidak diturunkan dari besaran lain. Ada <strong>7 besaran pokok</strong> dalam SI.</li>
+                <li><strong>Besaran turunan</strong> — besaran yang diturunkan dari kombinasi besaran pokok.</li>
+              </ul>
+              <p>Tabel 7 besaran pokok:</p>
+              <table>
+                <tr><th>Besaran</th><th>Satuan</th><th>Simbol</th><th>Dimensi</th></tr>
+                <tr><td>Panjang</td><td>meter</td><td>m</td><td>[L]</td></tr>
+                <tr><td>Massa</td><td>kilogram</td><td>kg</td><td>[M]</td></tr>
+                <tr><td>Waktu</td><td>sekon</td><td>s</td><td>[T]</td></tr>
+                <tr><td>Suhu</td><td>kelvin</td><td>K</td><td>[θ]</td></tr>
+                <tr><td>Kuat arus</td><td>ampere</td><td>A</td><td>[I]</td></tr>
+                <tr><td>Intensitas cahaya</td><td>candela</td><td>cd</td><td>[J]</td></tr>
+                <tr><td>Jumlah zat</td><td>mol</td><td>mol</td><td>[N]</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📐 Besaran Turunan Penting</h4>
+            <div class="formula-box"><span class="label">Massa Jenis</span>$$\rho = \frac{m}{V} \quad [\text{kg/m}^3]$$</div>
+            <div class="formula-box"><span class="label">Kecepatan</span>$$v = \frac{x}{t} \quad [\text{m/s}]$$</div>
+            <div class="formula-box"><span class="label">Percepatan</span>$$a = \frac{v}{t} \quad [\text{m/s}^2]$$</div>
+            <div class="formula-box"><span class="label">Gaya</span>$$F = m\,a \quad [\text{N}]$$</div>
+            <div class="formula-box"><span class="label">Usaha</span>$$W = F\,s \quad [\text{J}]$$</div>
+            <div class="formula-box"><span class="label">Daya</span>$$P = \frac{W}{t} \quad [\text{W}]$$</div>
+            <div class="formula-box"><span class="label">Tekanan</span>$$P = \frac{F}{A} \quad [\text{Pa}]$$</div>
+            <div class="formula-box"><span class="label">Muatan Listrik</span>$$Q = I\,t \quad [\text{C}]$$</div>
+          </div>
+
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Massa jenis</div>
+              <p>Sebuah balok bermassa 2 kg memiliki volume 0,001 m³. Hitung massa jenisnya.</p>
+              <div class="step">ρ = m/V = 2 / 0,001 = 2000 kg/m³</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Gaya</div>
+              <p>Benda 5 kg dipercepat 3 m/s². Berapa gaya yang bekerja?</p>
+              <div class="step">F = m·a = 5 × 3 = 15 N</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 3 — Daya</div>
+              <p>Motor melakukan usaha 6000 J dalam 20 detik. Berapa daya motor?</p>
+              <div class="step">P = W/t = 6000 / 20 = 300 W</div>
+            </div>
+          </div>
+
+          <div class="quiz" data-quiz="bab1-1">
+            <h4>🎯 Uji Pemahaman</h4>
+          </div>
+
+          <button class="done-toggle" data-topic="bab1-1">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 1.2 -->
+        <div class="topic" id="bab1-2" data-search="dimensi analisis dimensional kebenaran rumus">
+          <div class="topic-title">1.2 Dimensi</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Dimensi</strong> adalah cara menyatakan besaran dalam bentuk simbol besaran pokok. Berguna untuk:</p>
+              <ul>
+                <li>Mengecek kebenaran rumus (analisis dimensional).</li>
+                <li>Menurunkan hubungan antar besaran.</li>
+              </ul>
+              <p><strong>Aturan:</strong> kedua ruas persamaan harus memiliki dimensi yang sama.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📐 Dimensi Penting</h4>
+            <table>
+              <tr><th>Besaran</th><th>Rumus</th><th>Dimensi</th></tr>
+              <tr><td>Kecepatan</td><td>v = s/t</td><td>[L][T]⁻¹</td></tr>
+              <tr><td>Percepatan</td><td>a = v/t</td><td>[L][T]⁻²</td></tr>
+              <tr><td>Gaya</td><td>F = m·a</td><td>[M][L][T]⁻²</td></tr>
+              <tr><td>Usaha</td><td>W = F·s</td><td>[M][L]²[T]⁻²</td></tr>
+              <tr><td>Daya</td><td>P = W/t</td><td>[M][L]²[T]⁻³</td></tr>
+              <tr><td>Tekanan</td><td>P = F/A</td><td>[M][L]⁻¹[T]⁻²</td></tr>
+              <tr><td>Massa jenis</td><td>ρ = m/V</td><td>[M][L]⁻³</td></tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Cek rumus</div>
+              <p>Buktikan bahwa $s = v_0 t + \frac{1}{2}at^2$ konsisten secara dimensi.</p>
+              <div class="step">Ruas kiri: [L]</div>
+              <div class="step">Suku 1: [L][T]⁻¹ · [T] = [L] ✓</div>
+              <div class="step">Suku 2: [L][T]⁻² · [T]² = [L] ✓</div>
+              <div class="step">Konsisten!</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Dimensi tekanan</div>
+              <p>Tentukan dimensi tekanan.</p>
+              <div class="step">P = F/A = [M][L][T]⁻² / [L]² = [M][L]⁻¹[T]⁻²</div>
+            </div>
+          </div>
+
+          <div class="quiz" data-quiz="bab1-2"></div>
+          <button class="done-toggle" data-topic="bab1-2">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 1.3 -->
+        <div class="topic" id="bab1-3" data-search="satuan konversi awalan si prefix mks cgs">
+          <div class="topic-title">1.3 Satuan & Konversi</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Satuan</strong> = standar pengukuran. Sistem utama:</p>
+              <ul>
+                <li><strong>MKS</strong>: meter, kilogram, sekon</li>
+                <li><strong>CGS</strong>: centimeter, gram, sekon</li>
+                <li><strong>SI</strong>: standar internasional (mirip MKS)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📐 Awalan SI Penting</h4>
+            <table>
+              <tr><th>Awalan</th><th>Simbol</th><th>Faktor</th></tr>
+              <tr><td>tera</td><td>T</td><td>10¹²</td></tr>
+              <tr><td>giga</td><td>G</td><td>10⁹</td></tr>
+              <tr><td>mega</td><td>M</td><td>10⁶</td></tr>
+              <tr><td>kilo</td><td>k</td><td>10³</td></tr>
+              <tr><td>mili</td><td>m</td><td>10⁻³</td></tr>
+              <tr><td>mikro</td><td>μ</td><td>10⁻⁶</td></tr>
+              <tr><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
+              <tr><td>piko</td><td>p</td><td>10⁻¹²</td></tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Konversi kecepatan</div>
+              <p>Ubah 108 km/jam ke m/s.</p>
+              <div class="step">108 km/jam × (1000 m / 3600 s) = 30 m/s</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Konversi awalan</div>
+              <p>Ubah 2,5 GHz ke Hz.</p>
+              <div class="step">2,5 × 10⁹ Hz = 2.500.000.000 Hz</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 3 — Konversi luas</div>
+              <p>Ubah 1 m² ke cm².</p>
+              <div class="step">1 m² = (100 cm)² = 10.000 cm²</div>
+            </div>
+          </div>
+
+          <div class="quiz" data-quiz="bab1-3"></div>
+          <button class="done-toggle" data-topic="bab1-3">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 1.4 -->
+        <div class="topic" id="bab1-4" data-search="angka penting significant figures pembulatan ketelitian">
+          <div class="topic-title">1.4 Angka Penting</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Angka penting</strong> = angka yang bermakna dari hasil pengukuran, menunjukkan tingkat ketelitian.</p>
+              <p><strong>Aturan angka penting:</strong></p>
+              <ul>
+                <li>Semua angka bukan nol = angka penting. Contoh: <code>123</code> → 3 AP.</li>
+                <li>Nol di antara angka bukan nol = penting. Contoh: <code>102</code> → 3 AP.</li>
+                <li>Nol di depan angka desimal = bukan penting. Contoh: <code>0,0021</code> → 2 AP.</li>
+                <li>Nol di belakang tanpa desimal = ambigu. Contoh: <code>1200</code> → bisa 2, 3, atau 4 AP.</li>
+                <li>Nol di belakang dengan desimal = penting. Contoh: <code>1,200</code> → 4 AP.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Operasi perkalian</div>
+              <p>Hitung $4,56 \times 1,4$ (tulis dengan AP yang benar).</p>
+              <div class="step">4,56 × 1,4 = 6,384 → 2 AP → 6,4</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Operasi penjumlahan</div>
+              <p>Hitung $12,34 + 5,6$.</p>
+              <div class="step">12,34 + 5,6 = 17,94 → 1 desimal → 17,9</div>
+            </div>
+          </div>
+
+          <div class="quiz" data-quiz="bab1-4"></div>
+          <button class="done-toggle" data-topic="bab1-4">☐ Tandai selesai</button>
+        </div>
+      </section>
+
+      <!-- =================== BAB 2 =================== -->
+      <section class="section" data-bab="bab2">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <h2>Vektor</h2>
+        </div>
+
+        <!-- 2.1 -->
+        <div class="topic" id="bab2-1" data-search="skalar vektor besaran arah notasi">
+          <div class="topic-title">2.1 Skalar vs Vektor</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Skalar</strong> = hanya punya besar. Contoh: massa, waktu, suhu, volume, energi, daya.</p>
+              <p><strong>Vektor</strong> = punya besar DAN arah. Contoh: perpindahan, kecepatan, percepatan, gaya, momentum.</p>
+              <p><strong>Notasi vektor:</strong> huruf tebal, tanda panah, atau garis di atas. Contoh: <code>**A**</code>, <code>→A</code>, <code>Ā</code>.</p>
+              <p><strong>Vektor sama</strong> jika besar & arah sama. <strong>Vektor negatif</strong> = besar sama, arah berlawanan.</p>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab2-1"></div>
+          <button class="done-toggle" data-topic="bab2-1">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 2.2 -->
+        <div class="topic" id="bab2-2" data-search="penjumlahan vektor jajar genjang poligon resultan cosinus">
+          <div class="topic-title">2.2 Penjumlahan Vektor</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Penjumlahan vektor bisa dilakukan dengan:</p>
+              <ul>
+                <li><strong>Metode grafis/poligon</strong> — sambung ujung ke ujung.</li>
+                <li><strong>Metode jajar genjang</strong> — resultan = diagonal.</li>
+                <li><strong>Metode uraian</strong> — jumlahkan komponen.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>📐 Rumus Resultan & Selisih</h4>
+            <div class="formula-box"><span class="label">Resultan</span>$$R = \sqrt{A^2 + B^2 + 2AB\cos\alpha}$$</div>
+            <div class="formula-box"><span class="label">Selisih</span>$$R = \sqrt{A^2 + B^2 - 2AB\cos\alpha}$$</div>
+            <div class="formula-box"><span class="label">Arah Resultan</span>$$\tan\theta = \frac{R_y}{R_x}$$</div>
+            <div class="callout tip">
+              <span class="callout-icon">💡</span>
+              <div><strong>Kasus khusus:</strong> Jika $\alpha = 90°$, maka $\cos\alpha = 0$, sehingga $R = \sqrt{A^2 + B^2}$ (Pythagoras).</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Dua vektor</div>
+              <p>A = 40 N, B = 50 N, sudut 60°. Hitung resultan.</p>
+              <div class="step">R² = A² + B² + 2AB·cos 60°</div>
+              <div class="step">R² = 1600 + 2500 + 2·40·50·0,5</div>
+              <div class="step">R² = 4100 + 2000 = 6100</div>
+              <div class="step">R = √6100 = 78,1 N</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Tegak lurus</div>
+              <p>A = 3 N, B = 4 N, sudut 90°. Hitung resultan.</p>
+              <div class="step">R = √(3² + 4²) = √25 = 5 N</div>
+            </div>
+          </div>
+
+          <div class="quiz" data-quiz="bab2-2"></div>
+          <button class="done-toggle" data-topic="bab2-2">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 2.3 -->
+        <div class="topic" id="bab2-3" data-search="komponen vektor satuan ijk cartesian">
+          <div class="topic-title">2.3 Komponen & Vektor Satuan</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Setiap vektor bisa diuraikan menjadi komponen sumbu-x, y, z. Vektor satuan $\hat{i}, \hat{j}, \hat{k}$ menunjukkan arah sumbu.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Vektor dalam komponen</span>$$\vec{A} = A_x\hat{i} + A_y\hat{j} + A_z\hat{k}$$</div>
+            <div class="formula-box"><span class="label">Komponen dari sudut</span>$$A_x = A\cos\theta,\quad A_y = A\sin\theta$$</div>
+            <div class="formula-box"><span class="label">Besar vektor</span>$$|\vec{A}| = \sqrt{A_x^2 + A_y^2 + A_z^2}$$</div>
+            <div class="formula-box"><span class="label">Vektor satuan</span>$$\hat{A} = \frac{\vec{A}}{|\vec{A}|}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Urai vektor</div>
+              <p>Vektor 10 N membentuk sudut 30° dari sumbu-x. Uraikan!</p>
+              <div class="step">Aₓ = 10·cos 30° = 10·0,866 = 8,66 N</div>
+              <div class="step">Aᵧ = 10·sin 30° = 10·0,5 = 5 N</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Vektor satuan</div>
+              <p>Tentukan vektor satuan dari A = 3i + 4j.</p>
+              <div class="step">|A| = √(9+16) = 5</div>
+              <div class="step">Â = (3i + 4j)/5 = 0,6i + 0,8j</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab2-3"></div>
+          <button class="done-toggle" data-topic="bab2-3">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 2.4 -->
+        <div class="topic" id="bab2-4" data-search="dot product perkalian titik skalar cosinus">
+          <div class="topic-title">2.4 Dot Product (Perkalian Titik)</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Dot product</strong> menghasilkan <strong>skalar</strong>. Digunakan untuk mencari sudut antar vektor atau proyeksi.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Definisi geometris</span>$$\vec{A}\cdot\vec{B} = |\vec{A}||\vec{B}|\cos\theta$$</div>
+            <div class="formula-box"><span class="label">Definisi aljabar</span>$$\vec{A}\cdot\vec{B} = A_xB_x + A_yB_y + A_zB_z$$</div>
+            <div class="callout tip">
+              <span class="callout-icon">💡</span>
+              <div>
+                <strong>Sifat penting:</strong><br>
+                • A ⊥ B → A·B = 0<br>
+                • A ∥ B (searah) → A·B = |A||B|<br>
+                • î·î = ĵ·ĵ = k̂·k̂ = 1, î·ĵ = 0
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Dot product</div>
+              <p>A = 2i + 3j + 5k, B = 3i + 6j + 1k. Hitung A·B.</p>
+              <div class="step">A·B = (2)(3) + (3)(6) + (5)(1)</div>
+              <div class="step">A·B = 6 + 18 + 5 = 29</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Sudut antar vektor</div>
+              <p>A = 3i, B = 4j. Berapa sudut antara A dan B?</p>
+              <div class="step">A·B = 0 (karena tegak lurus)</div>
+              <div class="step">cos θ = 0 → θ = 90°</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab2-4"></div>
+          <button class="done-toggle" data-topic="bab2-4">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 2.5 -->
+        <div class="topic" id="bab2-5" data-search="cross product perkalian silang vektor sin matriks determinan">
+          <div class="topic-title">2.5 Cross Product (Perkalian Silang)</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Cross product</strong> menghasilkan <strong>vektor baru</strong> yang tegak lurus terhadap kedua vektor asal. Arah mengikuti aturan tangan kanan.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Definisi geometris</span>$$\vec{A}\times\vec{B} = |\vec{A}||\vec{B}|\sin\theta$$</div>
+            <div class="formula-box"><span class="label">Komponen</span>$$\vec{A}\times\vec{B} = (A_yB_z - A_zB_y)\hat{i} + (A_zB_x - A_xB_z)\hat{j} + (A_xB_y - A_yB_x)\hat{k}$$</div>
+            <div class="callout important">
+              <span class="callout-icon">⚠️</span>
+              <div><strong>Penting:</strong> A × B = -B × A (tidak komutatif).</div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Cross product</div>
+              <p>A = -1i + 3j + 5k, B = 2i + 1j - 5k. Hitung A × B.</p>
+              <div class="step">i: (3)(-5) - (5)(1) = -15 - 5 = -20</div>
+              <div class="step">j: (5)(2) - (-1)(-5) = 10 - 5 = 5</div>
+              <div class="step">k: (-1)(1) - (3)(2) = -1 - 6 = -7</div>
+              <div class="step">A × B = -20i + 5j - 7k</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab2-5"></div>
+          <button class="done-toggle" data-topic="bab2-5">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 2.6 -->
+        <div class="topic" id="bab2-6" data-search="aplikasi vektor kecepatan relatif navigasi">
+          <div class="topic-title">2.6 Aplikasi Vektor</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Aplikasi vektor yang paling sering muncul: <strong>kecepatan relatif</strong> (perahu, angin, pesawat).</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Kecepatan Relatif</span>$$\vec{v}_{AB} = \vec{v}_A - \vec{v}_B$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh — Perahu menyeberang</div>
+              <p>Perahu bergerak 4 m/s ke timur, arus air 3 m/s ke utara. Berapa kecepatan perahu terhadap tanah?</p>
+              <div class="step">v = √(4² + 3²) = √25 = 5 m/s</div>
+              <div class="step">Arah: tan θ = 3/4 → θ = 36,87° dari timur ke utara</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab2-6"></div>
+          <button class="done-toggle" data-topic="bab2-6">☐ Tandai selesai</button>
+        </div>
+      </section>
+
+      <!-- =================== BAB 3 =================== -->
+      <section class="section" data-bab="bab3">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <h2>Gerak Melingkar</h2>
+        </div>
+
+        <!-- 3.1 -->
+        <div class="topic" id="bab3-1" data-search="besaran sudut radian omega kecepatan sudut percepatan sudut">
+          <div class="topic-title">3.1 Besaran Sudut</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Gerak melingkar diukur dengan besaran <strong>sudut</strong> (radian), bukan linier (meter). 1 putaran = 2π rad = 360°.</p>
+              <ul>
+                <li><strong>Perpindahan sudut (θ)</strong> — sudut yang ditempuh.</li>
+                <li><strong>Kecepatan sudut (ω)</strong> — perubahan θ per waktu.</li>
+                <li><strong>Percepatan sudut (α)</strong> — perubahan ω per waktu.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Radian</span>$$\theta = \frac{S}{R}$$</div>
+            <div class="formula-box"><span class="label">Kecepatan Sudut</span>$$\omega = \frac{\Delta\theta}{\Delta t} = 2\pi f = \frac{2\pi}{T}$$</div>
+            <div class="formula-box"><span class="label">Percepatan Sudut</span>$$\alpha = \frac{\Delta\omega}{\Delta t}$$</div>
+            <div class="formula-box"><span class="label">Konversi rpm</span>$$1 \text{ rpm} = \frac{2\pi}{60} \text{ rad/s}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Roda 300 rpm</div>
+              <p>Roda berputar 300 rpm. Hitung ω dan f.</p>
+              <div class="step">f = 300/60 = 5 Hz</div>
+              <div class="step">ω = 2π·f = 2π·5 = 10π rad/s</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Percepatan sudut</div>
+              <p>ω berubah dari 4π ke 6π rad/s dalam 40 detik. Hitung α.</p>
+              <div class="step">α = (6π - 4π)/40 = 2π/40 = 0,05π rad/s²</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab3-1"></div>
+          <button class="done-toggle" data-topic="bab3-1">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 3.2 -->
+        <div class="topic" id="bab3-2" data-search="kinematika melingkar gmbb omega theta hubungan linier sudut">
+          <div class="topic-title">3.2 Kinematika Melingkar</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Gerak melingkar memiliki padanan langsung dengan gerak lurus:</p>
+              <table>
+                <tr><th>Gerak Lurus</th><th>Gerak Melingkar</th></tr>
+                <tr><td>$v = v_0 + at$</td><td>$\omega = \omega_0 + \alpha t$</td></tr>
+                <tr><td>$s = v_0 t + \frac{1}{2}at^2$</td><td>$\theta = \omega_0 t + \frac{1}{2}\alpha t^2$</td></tr>
+                <tr><td>$v^2 = v_0^2 + 2as$</td><td>$\omega^2 = \omega_0^2 + 2\alpha\theta$</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Hubungan Linier–Sudut</h4>
+            <div class="formula-box"><span class="label">Panjang busur</span>$$S = \theta R$$</div>
+            <div class="formula-box"><span class="label">Kecepatan linier</span>$$v = \omega R$$</div>
+            <div class="formula-box"><span class="label">Percepatan tangensial</span>$$a_T = \alpha R$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh — GMBB</div>
+              <p>Roda mula-mula diam, dipercepat α = 2 rad/s² selama 5 s. Hitung θ dan ω akhir.</p>
+              <div class="step">ω = ω₀ + αt = 0 + 2·5 = 10 rad/s</div>
+              <div class="step">θ = ω₀t + ½αt² = 0 + ½·2·25 = 25 rad</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab3-2"></div>
+          <button class="done-toggle" data-topic="bab3-2">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 3.3 -->
+        <div class="topic" id="bab3-3" data-search="percepatan sentripetal radial tangensial total">
+          <div class="topic-title">3.3 Percepatan dalam Gerak Melingkar</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Dalam gerak melingkar ada 2 percepatan:</p>
+              <ul>
+                <li><strong>Percepatan sentripetal (a_R)</strong> — mengubah ARAH kecepatan, selalu menuju pusat.</li>
+                <li><strong>Percepatan tangensial (a_T)</strong> — mengubah BESAR kecepatan, menyinggung lingkaran.</li>
+              </ul>
+              <p>Jika laju konstan (GMB), a_T = 0 tetapi a_R ≠ 0.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Sentripetal</span>$$a_R = \frac{v^2}{R} = \omega^2 R$$</div>
+            <div class="formula-box"><span class="label">Tangensial</span>$$a_T = \alpha R$$</div>
+            <div class="formula-box"><span class="label">Percepatan Total</span>$$a = \sqrt{a_R^2 + a_T^2}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — GMB</div>
+              <p>Bola diikat tali 1 m, diputar 3 putaran/s. Hitung a_R.</p>
+              <div class="step">ω = 3 × 2π = 6π rad/s</div>
+              <div class="step">a_R = ω²R = (6π)²·1 = 36π² ≈ 355,3 m/s²</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Percepatan total</div>
+              <p>a_R = 3 m/s², a_T = 4 m/s². Hitung a.</p>
+              <div class="step">a = √(3² + 4²) = 5 m/s²</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab3-3"></div>
+          <button class="done-toggle" data-topic="bab3-3">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 3.4 -->
+        <div class="topic" id="bab3-4" data-search="gaya sentripetal newton melingkar tegangan">
+          <div class="topic-title">3.4 Gaya dalam Gerak Melingkar</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Gaya sentripetal</strong> = gaya total yang menyebabkan benda bergerak melingkar. Arahnya selalu ke pusat lingkaran.</p>
+              <p>Bukan gaya baru — ini adalah peran yang dimainkan oleh gaya lain (tegangan tali, gravitasi, gesekan, normal).</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Gaya sentripetal</span>$$F_{sp} = m\,a_R = \frac{mv^2}{R} = m\omega^2 R$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Tegangan tali</div>
+              <p>Bola 0,2 kg diikat tali 1,2 m, diputar 3 putaran/s. Hitung tegangan tali.</p>
+              <div class="step">ω = 6π rad/s</div>
+              <div class="step">T = mω²R = 0,2·(6π)²·1,2 = 85,2 N</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Tikungan</div>
+              <p>Mobil melewati tikungan R = 50 m. Koefisien gesek 0,4. Hitung kecepatan maksimum.</p>
+              <div class="step">v_max = √(μgR) = √(0,4·9,8·50) = √196 = 14 m/s</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab3-4"></div>
+          <button class="done-toggle" data-topic="bab3-4">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 3.5 -->
+        <div class="topic" id="bab3-5" data-search="aplikasi satelit orbit tikungan vertikal ayunan konis">
+          <div class="topic-title">3.5 Aplikasi Gerak Melingkar</div>
+          <div class="card">
+            <h4>📖 Teori & Rumus</h4>
+            <div class="theory">
+              <p><strong>1. Satelit mengorbit Bumi</strong></p>
+              <div class="formula-box">$$v = \sqrt{\frac{GM}{R}}, \quad T = 2\pi\sqrt{\frac{R^3}{GM}}$$</div>
+              <p><strong>2. Tikungan datar</strong></p>
+              <div class="formula-box">$$v_{\max} = \sqrt{\mu g R}$$</div>
+              <p><strong>3. Lingkaran vertikal (bola di tali)</strong></p>
+              <div class="formula-box">Titik bawah: $T = mg + \frac{mv^2}{R}$</div>
+              <div class="formula-box">Titik atas: $T = \frac{mv^2}{R} - mg$</div>
+              <div class="formula-box">$v_{\min}$ di titik atas: $\sqrt{gR}$</div>
+              <p><strong>4. Ayunan konis</strong></p>
+              <div class="formula-box">$$T\cos\theta = mg, \quad T\sin\theta = \frac{mv^2}{R}$$</div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Satelit</div>
+              <p>Satelit di orbit R = 7×10⁶ m, M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹. Hitung v.</p>
+              <div class="step">v = √(GM/R) = √(6,67e-11 · 5,97e24 / 7e6)</div>
+              <div class="step">v = √(5,69e7) ≈ 7540 m/s</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Bola di tali vertikal</div>
+              <p>m = 0,1 kg, R = 2 m, v di bawah = 10 m/s. Hitung T di bawah.</p>
+              <div class="step">T = mg + mv²/R = 0,1·9,8 + 0,1·100/2</div>
+              <div class="step">T = 0,98 + 5 = 5,98 N</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 3 — Kecepatan minimum di atas</div>
+              <p>Bola di tali R = 2,5 m. Hitung v minimum di titik atas agar tali tetap tegang.</p>
+              <div class="step">v_min = √(gR) = √(9,8·2,5) = √24,5 ≈ 4,95 m/s</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab3-5"></div>
+          <button class="done-toggle" data-topic="bab3-5">☐ Tandai selesai</button>
+        </div>
+      </section>
+
+      <!-- =================== BAB 4 =================== -->
+      <section class="section" data-bab="bab4">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <h2>Gelombang & Bunyi</h2>
+        </div>
+
+        <!-- 4.1 -->
+        <div class="topic" id="bab4-1" data-search="definisi gelombang transversal longitudinal mekanik elektromagnetik">
+          <div class="topic-title">4.1 Definisi & Jenis Gelombang</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Gelombang</strong> = osilasi yang merambat, memindahkan energi tanpa memindahkan medium.</p>
+              <p><strong>Berdasarkan medium:</strong></p>
+              <ul>
+                <li><strong>Mekanik</strong> — butuh medium (bunyi, gelombang air, tali).</li>
+                <li><strong>Elektromagnetik</strong> — tidak butuh medium (cahaya, radio, WiFi).</li>
+              </ul>
+              <p><strong>Berdasarkan arah getar:</strong></p>
+              <ul>
+                <li><strong>Transversal</strong> — arah getar ⊥ arah rambat (tali, cahaya).</li>
+                <li><strong>Longitudinal</strong> — arah getar ∥ arah rambat (bunyi, slinki).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-1"></div>
+          <button class="done-toggle" data-topic="bab4-1">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.2 -->
+        <div class="topic" id="bab4-2" data-search="besaran gelombang amplitudo periode frekuensi panjang gelombang cepat rambat">
+          <div class="topic-title">4.2 Besaran Gelombang</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <table>
+                <tr><th>Besaran</th><th>Simbol</th><th>Satuan</th><th>Definisi</th></tr>
+                <tr><td>Amplitudo</td><td>A</td><td>m</td><td>Simpangan maksimum</td></tr>
+                <tr><td>Periode</td><td>T</td><td>s</td><td>Waktu 1 osilasi lengkap</td></tr>
+                <tr><td>Frekuensi</td><td>f</td><td>Hz</td><td>Jumlah osilasi per detik</td></tr>
+                <tr><td>Panjang gelombang</td><td>λ</td><td>m</td><td>Jarak 2 puncak berdekatan</td></tr>
+                <tr><td>Cepat rambat</td><td>v</td><td>m/s</td><td>Kecepatan pola berpindah</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Cepat rambat</span>$$v = \lambda f = \frac{\lambda}{T}$$</div>
+            <div class="formula-box"><span class="label">Frekuensi & periode</span>$$f = \frac{1}{T}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh — Gelombang air</div>
+              <p>Gelombang air memiliki λ = 2 m dan f = 5 Hz. Hitung v.</p>
+              <div class="step">v = λ·f = 2 × 5 = 10 m/s</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-2"></div>
+          <button class="done-toggle" data-topic="bab4-2">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.3 -->
+        <div class="topic" id="bab4-3" data-search="persamaan gelombang sinusoidal omega k fase diferensial">
+          <div class="topic-title">4.3 Persamaan Gelombang</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Gelombang sinusoidal dinyatakan dengan fungsi cos atau sin. Persamaan umumnya mengandung:</p>
+              <ul>
+                <li><strong>ω = 2πf</strong> — frekuensi sudut</li>
+                <li><strong>k = 2π/λ</strong> — bilangan gelombang</li>
+                <li><strong>φ₀</strong> — fase awal</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Persamaan gelombang</span>$$y(x,t) = A\cos(\omega t - kx + \varphi_0)$$</div>
+            <div class="formula-box"><span class="label">Arah rambat</span>Minus (-) → ke kanan, Plus (+) → ke kiri</div>
+            <div class="formula-box"><span class="label">Hubungan ω, k, v</span>$$v = \frac{\omega}{k}$$</div>
+            <div class="formula-box"><span class="label">Persamaan diferensial</span>$$\frac{\partial^2 y}{\partial x^2} - \frac{1}{v^2}\frac{\partial^2 y}{\partial t^2} = 0$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh — Tulis persamaan gelombang</div>
+              <p>Gelombang dengan T = 0,4 s, A = 10 cm, v = 4 m/s, merambat ke kanan, di x=0 saat t=0,2 s simpangan maksimum.</p>
+              <div class="step">ω = 2π/T = 2π/0,4 = 5π rad/s</div>
+              <div class="step">k = ω/v = 5π/4 rad/m</div>
+              <div class="step">Syarat: y(0; 0,2) = A → cos(5π·0,2 + φ₀) = 1</div>
+              <div class="step">cos(π + φ₀) = 1 → φ₀ = -π</div>
+              <div class="step">y = 0,1 cos(5πt - 5πx/4 - π) meter</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-3"></div>
+          <button class="done-toggle" data-topic="bab4-3">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.4 -->
+        <div class="topic" id="bab4-4" data-search="kecepatan gelombang medium tali padat fluida air dangkal modulus young bulk">
+          <div class="topic-title">4.4 Kecepatan Gelombang dalam Medium</div>
+          <div class="card">
+            <h4>📐 Rumus per Medium</h4>
+            <div class="formula-box"><span class="label">Tali</span>$$v = \sqrt{\frac{F_T}{\mu}}, \quad \mu = \frac{m}{L}$$</div>
+            <div class="formula-box"><span class="label">Zat padat</span>$$v = \sqrt{\frac{Y}{\rho}}$$</div>
+            <div class="formula-box"><span class="label">Fluida (cair/gas)</span>$$v = \sqrt{\frac{B}{\rho}}$$</div>
+            <div class="formula-box"><span class="label">Air dangkal</span>$$v = \sqrt{gd}$$</div>
+            <div class="formula-box"><span class="label">Bunyi di udara (suhu T °C)</span>$$v = (331 + 0{,}6T) \text{ m/s}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Gelombang tali</div>
+              <p>Tali panjang 30 m, massa 0,55 kg, tegangan 150 N. Hitung v.</p>
+              <div class="step">μ = m/L = 0,55/30 = 0,0183 kg/m</div>
+              <div class="step">v = √(150/0,0183) = √8197 ≈ 90,5 m/s</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Gelombang baja</div>
+              <p>Baja Y = 2×10¹¹ N/m², ρ = 7800 kg/m³. Hitung v.</p>
+              <div class="step">v = √(2e11/7800) = √(2,56e7) ≈ 5063 m/s</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 3 — Kecepatan bunyi</div>
+              <p>Hitung kecepatan bunyi di udara saat suhu 30 °C.</p>
+              <div class="step">v = 331 + 0,6·30 = 331 + 18 = 349 m/s</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-4"></div>
+          <button class="done-toggle" data-topic="bab4-4">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.5 -->
+        <div class="topic" id="bab4-5" data-search="energi intensitas daya gelombang bola level">
+          <div class="topic-title">4.5 Energi & Intensitas Gelombang</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p>Gelombang memindahkan energi. <strong>Intensitas</strong> = daya per satuan luas. Untuk gelombang bola, intensitas berkurang kuadratik terhadap jarak.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Intensitas</span>$$I = \frac{P}{A}$$</div>
+            <div class="formula-box"><span class="label">Gelombang bola</span>$$I = \frac{P}{4\pi r^2} \propto \frac{1}{r^2}$$</div>
+            <div class="formula-box"><span class="label">Intensitas sinusoidal</span>$$I = \tfrac{1}{2}\rho v \omega^2 A^2$$</div>
+            <div class="formula-box"><span class="label">Energi</span>$$E \propto A^2$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Loudspeaker</div>
+              <p>Loudspeaker daya 10 W. Hitung intensitas pada jarak 5 m.</p>
+              <div class="step">A = 4πr² = 4π·25 = 314 m²</div>
+              <div class="step">I = 10/314 = 0,0318 W/m²</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Perbandingan intensitas</div>
+              <p>Intensitas pada r₁ = 10 m adalah I₁. Berapa I₂ pada r₂ = 20 m?</p>
+              <div class="step">I₂/I₁ = (r₁/r₂)² = (10/20)² = 1/4</div>
+              <div class="step">Jadi I₂ = I₁/4</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-5"></div>
+          <button class="done-toggle" data-topic="bab4-5">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.6 -->
+        <div class="topic" id="bab4-6" data-search="bunyi desibel level intensitas ambang pendengaran ultrasonik infrasonik">
+          <div class="topic-title">4.6 Bunyi & Desibel</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Bunyi</strong> = gelombang mekanik longitudinal. Butuh medium, tidak bisa merambat di ruang hampa.</p>
+              <ul>
+                <li><strong>Infrasonik</strong> &lt; 20 Hz</li>
+                <li><strong>Audiosonik</strong> 20 – 20.000 Hz (pendengaran manusia)</li>
+                <li><strong>Ultrasonik</strong> &gt; 20.000 Hz</li>
+              </ul>
+              <p><strong>Kuat bunyi</strong> (loudness) = amplitudo. <strong>Tinggi bunyi</strong> (pitch) = frekuensi.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Level intensitas (dB)</span>$$\beta = 10\log\left(\frac{I}{I_0}\right)$$</div>
+            <div class="formula-box"><span class="label">I₀ (ambang pendengaran)</span>$$I_0 = 10^{-12} \text{ W/m}^2$$</div>
+            <div class="formula-box"><span class="label">Selisih level</span>$$\beta_2 - \beta_1 = 10\log\left(\frac{I_2}{I_1}\right)$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Level intensitas</div>
+              <p>Intensitas bunyi 10⁻⁵ W/m². Hitung β.</p>
+              <div class="step">β = 10 log(10⁻⁵/10⁻¹²) = 10 log(10⁷) = 70 dB</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Selisih dB</div>
+              <p>Sirine 100 dB pada 30 m. Berapa pada 90 m?</p>
+              <div class="step">I₂/I₁ = (30/90)² = 1/9</div>
+              <div class="step">Δβ = 10 log(1/9) = -9,5 dB</div>
+              <div class="step">β₂ = 100 - 9,5 = 90,5 dB</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-6"></div>
+          <button class="done-toggle" data-topic="bab4-6">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.7 -->
+        <div class="topic" id="bab4-7" data-search="efek doppler supersonik mach frekuensi relatif">
+          <div class="topic-title">4.7 Efek Doppler & Supersonik</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Efek Doppler</strong> = perubahan frekuensi yang didengar pengamat karena gerak relatif sumber/pengamat.</p>
+              <ul>
+                <li>Sumber mendekat → frekuensi terdengar <strong>lebih tinggi</strong>.</li>
+                <li>Sumber menjauh → frekuensi terdengar <strong>lebih rendah</strong>.</li>
+              </ul>
+              <p><strong>Supersonik</strong> = benda bergerak lebih cepat dari kecepatan bunyi. Membentuk kerucut Mach.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Efek Doppler</span>$$f' = f \cdot \frac{v \pm v_p}{v \mp v_s}$$</div>
+            <div class="callout tip">
+              <span class="callout-icon">💡</span>
+              <div>Tanda atas: mendekat. Tanda bawah: menjauh. v = kecepatan bunyi, v_p = pengamat, v_s = sumber.</div>
+            </div>
+            <div class="formula-box"><span class="label">Sudut Mach</span>$$\sin\theta = \frac{v}{u}$$</div>
+            <div class="formula-box"><span class="label">Bilangan Mach</span>$$M = \frac{u}{v}$$</div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh 1 — Ambulans mendekat</div>
+              <p>Ambulans 800 Hz bergerak 30 m/s mendekati pengamat diam. v_bunyi = 340 m/s. Hitung f'.</p>
+              <div class="step">f' = 800 · 340/(340-30)</div>
+              <div class="step">f' = 800 · 340/310 = 877 Hz</div>
+            </div>
+            <div class="example">
+              <div class="example-title">Contoh 2 — Sudut Mach</div>
+              <p>Pesawat Mach 2,3 dengan v_bunyi 310 m/s. Hitung sudut kerucut.</p>
+              <div class="step">sin θ = 1/M = 1/2,3 = 0,435</div>
+              <div class="step">θ = 25,8°</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-7"></div>
+          <button class="done-toggle" data-topic="bab4-7">☐ Tandai selesai</button>
+        </div>
+
+        <!-- 4.8 -->
+        <div class="topic" id="bab4-8" data-search="huygens muka gelombang usg impedansi pantulan">
+          <div class="topic-title">4.8 Prinsip Huygens & Aplikasi USG</div>
+          <div class="card">
+            <h4>📖 Teori</h4>
+            <div class="theory">
+              <p><strong>Prinsip Huygens:</strong> setiap titik pada muka gelombang berperan sebagai sumber gelombang titik baru. Muka gelombang baru = envelope dari semua gelombang titik.</p>
+              <p>Prinsip ini menjelaskan <strong>pemantulan</strong>, <strong>pembiasan</strong>, dan <strong>difraksi</strong>.</p>
+              <p><strong>Aplikasi USG:</strong> gelombang ultrasonik dipancarkan ke tubuh, dipantulkan kembali. Untuk memaksimalkan penetrasi, digunakan <strong>gel</strong> yang mencocokkan impedansi.</p>
+            </div>
+          </div>
+          <div class="card">
+            <h4>📐 Rumus</h4>
+            <div class="formula-box"><span class="label">Koefisien pantulan</span>$$R = \frac{Z_2 - Z_1}{Z_1 + Z_2}$$</div>
+            <div class="callout tip">
+              <span class="callout-icon">💡</span>
+              <div><strong>Impedansi akustik</strong> Z = ρ·v. Semakin beda Z antar medium, semakin banyak yang dipantulkan.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>💡 Contoh Soal</h4>
+            <div class="example">
+              <div class="example-title">Contoh — Pemantulan tanpa gel</div>
+              <p>Z_udara = 0,0004 kg/m²s, Z_tubuh = 1,63×10⁶ kg/m²s. Hitung R.</p>
+              <div class="step">R = (1,63e6 - 0,0004)/(1,63e6 + 0,0004) ≈ 1</div>
+              <div class="step">Artinya hampir 100% dipantulkan. Inilah kenapa perlu gel!</div>
+            </div>
+          </div>
+          <div class="quiz" data-quiz="bab4-8"></div>
+          <button class="done-toggle" data-topic="bab4-8">☐ Tandai selesai</button>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      <p>© 2026 — Fisika Teknik | Sumber: Mikrajuddin Abdullah (ITB) & Sulwan Dase (PNUP)</p>
+      <p style="margin-top: 6px;">Website ini untuk keperluan belajar — bebas digunakan & dimodifikasi.</p>
+    </footer>
   </div>
-  <button class="filter-btn active" data-filter="all">Semua</button>
-  <button class="filter-btn" data-filter="bab1">Bab 1</button>
-  <button class="filter-btn" data-filter="bab2">Bab 2</button>
-  <button class="filter-btn" data-filter="bab3">Bab 3</button>
-  <button class="filter-btn" data-filter="bab4">Bab 4</button>
-  <button class="dark-toggle" id="darkToggle">🌙</button>
-</div>
-
-<main id="mainContent">
-
-<h2 class="chapter-title" data-bab="bab1">📏 Bab 1 — Besaran & Satuan</h2>
-<div class="cards-grid" data-bab="bab1">
-
-<div class="card" data-search="besaran pokok si">
-<div class="card-header"><span class="card-num">1</span><span>7 Besaran Pokok</span></div>
-<div class="card-formula">Panjang (m), Massa (kg), Waktu (s), Suhu (K), Kuat arus (A), Intensitas cahaya (cd), Jumlah zat (mol)</div>
-<div class="card-desc">Besaran dasar yang tidak diturunkan dari besaran lain.</div>
-<details class="card-example"><summary>Contoh</summary><p>Kecepatan = panjang/waktu → m/s, turunan dari panjang & waktu.</p></details>
-</div>
-
-<div class="card" data-search="dimensi gaya usaha tekanan">
-<div class="card-header"><span class="card-num">2</span><span>Dimensi</span></div>
-<div class="card-formula">Gaya: $[M][L][T]^{-2}$<br>Usaha: $[M][L]^2[T]^{-2}$<br>Tekanan: $[M][L]^{-1}[T]^{-2}$</div>
-<div class="card-desc">Dimensi menyatakan bentuk besaran. Berguna untuk cek rumus.</div>
-<details class="card-example"><summary>Contoh</summary><p>Cek $F=ma$: $[M][L][T]^{-2}$. Benar!</p></details>
-</div>
-
-<div class="card" data-search="massa jenis rho">
-<div class="card-header"><span class="card-num">3</span><span>Massa Jenis</span></div>
-<div class="card-formula">$$\rho = \frac{m}{V}$$</div>
-<div class="card-desc">Massa per volume. Satuan kg/m³.</div>
-<details class="card-example"><summary>Contoh</summary><p>Air ρ=1000 kg/m³. V=0,5 m³ → m=500 kg.</p></details>
-</div>
-
-<div class="card" data-search="kecepatan velocity">
-<div class="card-header"><span class="card-num">4</span><span>Kecepatan</span></div>
-<div class="card-formula">$$v = \frac{x}{t}$$</div>
-<div class="card-desc">Jarak per waktu. Satuan m/s.</div>
-<details class="card-example"><summary>Contoh</summary><p>120 km dalam 2 jam → 60 km/jam = 16,67 m/s.</p></details>
-</div>
-
-<div class="card" data-search="percepatan acceleration">
-<div class="card-header"><span class="card-num">5</span><span>Percepatan</span></div>
-<div class="card-formula">$$a = \frac{v}{t}$$</div>
-<div class="card-desc">Perubahan kecepatan per waktu. Satuan m/s².</div>
-<details class="card-example"><summary>Contoh</summary><p>0 ke 20 m/s dalam 5 s → a=4 m/s².</p></details>
-</div>
-
-<div class="card" data-search="gaya newton">
-<div class="card-header"><span class="card-num">6</span><span>Gaya (Newton II)</span></div>
-<div class="card-formula">$$F = m \cdot a$$</div>
-<div class="card-desc">Gaya = massa × percepatan. Satuan N.</div>
-<details class="card-example"><summary>Contoh</summary><p>5 kg dipercepat 3 m/s² → F=15 N.</p></details>
-</div>
-
-<div class="card" data-search="tekanan pascal">
-<div class="card-header"><span class="card-num">7</span><span>Tekanan</span></div>
-<div class="card-formula">$$P = \frac{F}{A}$$</div>
-<div class="card-desc">Gaya per luas. Satuan Pa = N/m².</div>
-<details class="card-example"><summary>Contoh</summary><p>F=100 N, A=0,5 m² → P=200 Pa.</p></details>
-</div>
-
-<div class="card" data-search="usaha energi joule">
-<div class="card-header"><span class="card-num">8</span><span>Usaha</span></div>
-<div class="card-formula">$$W = F \cdot s$$</div>
-<div class="card-desc">Gaya × perpindahan. Satuan J.</div>
-<details class="card-example"><summary>Contoh</summary><p>F=50 N, s=4 m → W=200 J.</p></details>
-</div>
-
-<div class="card" data-search="daya watt">
-<div class="card-header"><span class="card-num">9</span><span>Daya</span></div>
-<div class="card-formula">$$P = \frac{W}{t}$$</div>
-<div class="card-desc">Usaha per waktu. Satuan W = J/s.</div>
-<details class="card-example"><summary>Contoh</summary><p>W=600 J dalam 3 s → P=200 W.</p></details>
-</div>
-
-<div class="card" data-search="muatan listrik coulomb">
-<div class="card-header"><span class="card-num">10</span><span>Muatan Listrik</span></div>
-<div class="card-formula">$$Q = I \cdot t$$</div>
-<div class="card-desc">Arus × waktu. Satuan C.</div>
-<details class="card-example"><summary>Contoh</summary><p>I=2 A selama 10 s → Q=20 C.</p></details>
-</div>
-
-<div class="card" data-search="konversi km jam m s">
-<div class="card-header"><span class="card-num">11</span><span>Konversi Kecepatan</span></div>
-<div class="card-formula">$$1 \text{ km/jam} = \frac{5}{18} \text{ m/s} \approx 0{,}278 \text{ m/s}$$</div>
-<div class="card-desc">Faktor 3,6 paling sering muncul di soal.</div>
-<details class="card-example"><summary>Contoh</summary><p>72 km/jam = 72/3,6 = 20 m/s.</p></details>
-</div>
-
-<div class="card" data-search="awalan si prefix">
-<div class="card-header"><span class="card-num">12</span><span>Awalan SI</span></div>
-<div class="card-formula">k=10³, M=10⁶, G=10⁹, T=10¹²<br>m=10⁻³, μ=10⁻⁶, n=10⁻⁹, p=10⁻¹²</div>
-<div class="card-desc">Kelipatan satuan.</div>
-<details class="card-example"><summary>Contoh</summary><p>5 MHz = 5×10⁶ Hz.</p></details>
-</div>
 
 </div>
-
-<h2 class="chapter-title" data-bab="bab2">➡️ Bab 2 — Vektor</h2>
-<div class="cards-grid" data-bab="bab2">
-
-<div class="card" data-search="besar vektor magnitude">
-<div class="card-header"><span class="card-num">13</span><span>Besar Vektor</span></div>
-<div class="card-formula">2D: $|\vec{A}| = \sqrt{A_x^2 + A_y^2}$<br>3D: $|\vec{A}| = \sqrt{A_x^2 + A_y^2 + A_z^2}$</div>
-<div class="card-desc">Panjang vektor. Selalu ≥ 0.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=(3,4) → |A|=5.</p></details>
-</div>
-
-<div class="card" data-search="vektor satuan">
-<div class="card-header"><span class="card-num">14</span><span>Vektor Satuan</span></div>
-<div class="card-formula">$$\hat{A} = \frac{\vec{A}}{|\vec{A}|}$$</div>
-<div class="card-desc">Vektor panjang 1 searah A.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=(3,4), |A|=5 → Â=(0,6; 0,8).</p></details>
-</div>
-
-<div class="card" data-search="komponen vektor sudut">
-<div class="card-header"><span class="card-num">15</span><span>Komponen Vektor</span></div>
-<div class="card-formula">$$A_x = A\cos\theta, \quad A_y = A\sin\theta$$</div>
-<div class="card-desc">Menguraikan vektor ke sumbu-x dan y.</div>
-<details class="card-example"><summary>Contoh</summary><p>10 N, 60° → Ax=5, Ay=8,66.</p></details>
-</div>
-
-<div class="card" data-search="resultan vektor jajar genjang">
-<div class="card-header"><span class="card-num">16</span><span>Resultan Dua Vektor</span></div>
-<div class="card-formula">$$R = \sqrt{A^2 + B^2 + 2AB\cos\alpha}$$</div>
-<div class="card-desc">Jika α=90°, R=√(A²+B²).</div>
-<details class="card-example"><summary>Contoh</summary><p>A=40, B=50, α=60° → R=78,1 N.</p></details>
-</div>
-
-<div class="card" data-search="arah resultan tan theta">
-<div class="card-header"><span class="card-num">17</span><span>Arah Resultan</span></div>
-<div class="card-formula">$$\tan\theta = \frac{R_y}{R_x}$$</div>
-<div class="card-desc">Sudut terhadap sumbu-x positif.</div>
-<details class="card-example"><summary>Contoh</summary><p>Rx=8, Ry=6 → θ=36,87°.</p></details>
-</div>
-
-<div class="card" data-search="selisih vektor">
-<div class="card-header"><span class="card-num">18</span><span>Selisih Vektor</span></div>
-<div class="card-formula">$$R = \sqrt{A^2 + B^2 - 2AB\cos\alpha}$$</div>
-<div class="card-desc">Tanda minus karena arah B dibalik.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=3, B=4, α=90° → R=5.</p></details>
-</div>
-
-<div class="card" data-search="uraian komponen resultan">
-<div class="card-header"><span class="card-num">19</span><span>Uraian Resultan</span></div>
-<div class="card-formula">$R_x = A_x + B_x$<br>$R_y = A_y + B_y$<br>$|R| = \sqrt{R_x^2 + R_y^2}$</div>
-<div class="card-desc">Metode paling universal.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=(3,4), B=(1,-2) → R=(4,2), |R|=4,47.</p></details>
-</div>
-
-<div class="card" data-search="dot product perkalian titik">
-<div class="card-header"><span class="card-num">20</span><span>Dot Product</span></div>
-<div class="card-formula">$$\vec{A}\cdot\vec{B} = |\vec{A}||\vec{B}|\cos\theta = A_xB_x + A_yB_y + A_zB_z$$</div>
-<div class="card-desc">Hasil skalar. A⊥B → 0.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=(2,3,5), B=(3,6,1) → 29.</p></details>
-</div>
-
-<div class="card" data-search="cross product perkalian silang">
-<div class="card-header"><span class="card-num">21</span><span>Cross Product</span></div>
-<div class="card-formula">$$\vec{A}\times\vec{B} = |\vec{A}||\vec{B}|\sin\theta$$</div>
-<div class="card-desc">Hasil vektor. A∥B → 0.</div>
-<details class="card-example"><summary>Contoh</summary><p>i × j = k.</p></details>
-</div>
-
-<div class="card" data-search="komponen cross product">
-<div class="card-header"><span class="card-num">22</span><span>Komponen Cross</span></div>
-<div class="card-formula">$$(A_yB_z - A_zB_y)\hat{i} + (A_zB_x - A_xB_z)\hat{j} + (A_xB_y - A_yB_x)\hat{k}$$</div>
-<div class="card-desc">Gunakan determinan matriks.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=(-1,3,5), B=(2,1,-5) → -20î+5ĵ-7k̂.</p></details>
-</div>
-
-<div class="card" data-search="sifat vektor satuan ijk">
-<div class="card-header"><span class="card-num">23</span><span>Sifat Vektor Satuan</span></div>
-<div class="card-formula">î·î = ĵ·ĵ = k̂·k̂ = 1<br>î·ĵ = ĵ·k̂ = k̂·î = 0<br>î×ĵ = k̂, ĵ×k̂ = î, k̂×î = ĵ</div>
-<div class="card-desc">Aturan dasar.</div>
-<details class="card-example"><summary>Contoh</summary><p>(2î+3ĵ)·(4î-ĵ) = 5.</p></details>
-</div>
-
-<div class="card" data-search="kecepatan relatif">
-<div class="card-header"><span class="card-num">24</span><span>Kecepatan Relatif</span></div>
-<div class="card-formula">$$\vec{v}_{rel} = \vec{v}_{benda} - \vec{v}_{acuan}$$</div>
-<div class="card-desc">Dipakai untuk soal perahu, angin, pesawat.</div>
-<details class="card-example"><summary>Contoh</summary><p>Perahu 10 m/s utara, arus 4 m/s timur → |v|=10,77 m/s.</p></details>
-</div>
-
-</div>
-
-<h2 class="chapter-title" data-bab="bab3">🔄 Bab 3 — Gerak Melingkar</h2>
-<div class="cards-grid" data-bab="bab3">
-
-<div class="card" data-search="radian sudut busur">
-<div class="card-header"><span class="card-num">25</span><span>Definisi Radian</span></div>
-<div class="card-formula">$$\theta = \frac{S}{R}, \quad 1 \text{ putaran} = 2\pi \text{ rad}$$</div>
-<div class="card-desc">1 rad ≈ 57,3°.</div>
-<details class="card-example"><summary>Contoh</summary><p>Busur 30 cm, R=10 cm → θ=3 rad.</p></details>
-</div>
-
-<div class="card" data-search="kecepatan sudut omega rpm">
-<div class="card-header"><span class="card-num">26</span><span>Kecepatan Sudut</span></div>
-<div class="card-formula">$$\omega = \frac{\Delta\theta}{\Delta t} = \frac{2\pi}{T} = 2\pi f$$</div>
-<div class="card-desc">Satuan rad/s. 1 rpm = 2π/60 rad/s.</div>
-<details class="card-example"><summary>Contoh</summary><p>300 rpm → 10π rad/s.</p></details>
-</div>
-
-<div class="card" data-search="percepatan sudut alpha">
-<div class="card-header"><span class="card-num">27</span><span>Percepatan Sudut</span></div>
-<div class="card-formula">$$\alpha = \frac{\Delta\omega}{\Delta t}$$</div>
-<div class="card-desc">Satuan rad/s².</div>
-<details class="card-example"><summary>Contoh</summary><p>ω 4π→6π dalam 40 s → α=0,05π.</p></details>
-</div>
-
-<div class="card" data-search="hubungan linier sudut">
-<div class="card-header"><span class="card-num">28</span><span>Hubungan Linier–Sudut</span></div>
-<div class="card-formula">$$S = \theta R, \quad v = \omega R, \quad a_T = \alpha R$$</div>
-<div class="card-desc">Jembatan besaran linier & sudut.</div>
-<details class="card-example"><summary>Contoh</summary><p>R=0,4 m, ω=20 rad/s → v=8 m/s.</p></details>
-</div>
-
-<div class="card" data-search="percepatan sentripetal radial">
-<div class="card-header"><span class="card-num">29</span><span>Percepatan Sentripetal</span></div>
-<div class="card-formula">$$a_R = \frac{v^2}{R} = \omega^2 R$$</div>
-<div class="card-desc">Arah ke pusat lingkaran.</div>
-<details class="card-example"><summary>Contoh</summary><p>CD R=4 cm, ω=3 → a_R=0,36 m/s².</p></details>
-</div>
-
-<div class="card" data-search="percepatan total">
-<div class="card-header"><span class="card-num">30</span><span>Percepatan Total</span></div>
-<div class="card-formula">$$a = \sqrt{a_R^2 + a_T^2}$$</div>
-<div class="card-desc">Gabungan sentripetal + tangensial.</div>
-<details class="card-example"><summary>Contoh</summary><p>a_R=3, a_T=4 → a=5 m/s².</p></details>
-</div>
-
-<div class="card" data-search="gaya sentripetal mv2 r">
-<div class="card-header"><span class="card-num">31</span><span>Gaya Sentripetal</span></div>
-<div class="card-formula">$$F_R = m a_R = \frac{mv^2}{R} = m\omega^2 R$$</div>
-<div class="card-desc">Arah selalu ke pusat.</div>
-<details class="card-example"><summary>Contoh</summary><p>m=0,2 kg, R=1,2 m, ω=6π → F=85,2 N.</p></details>
-</div>
-
-<div class="card" data-search="gmbb gerak melingkar berubah">
-<div class="card-header"><span class="card-num">32</span><span>GMBB</span></div>
-<div class="card-formula">$\omega = \omega_0 + \alpha t$<br>$\theta = \omega_0 t + \frac{1}{2}\alpha t^2$<br>$\omega^2 = \omega_0^2 + 2\alpha\theta$</div>
-<div class="card-desc">Padanan GLBB.</div>
-<details class="card-example"><summary>Contoh</summary><p>ω dari 6 put/s dipercepat 4 rad/s² selama 5 s → 57,7 rad/s.</p></details>
-</div>
-
-<div class="card" data-search="sistem roda koaksial">
-<div class="card-header"><span class="card-num">33</span><span>Sistem Roda</span></div>
-<div class="card-formula">Langsung/tak langsung: $v_1 = v_2$<br>Koaksial: $\omega_1 = \omega_2$</div>
-<div class="card-desc">Roda berban → v sama. Seporos → ω sama.</div>
-<details class="card-example"><summary>Contoh</summary><p>Roda A (R=40) koaksial B (R=20), ω_A=10 → ω_B=10, v_A=4, v_B=2.</p></details>
-</div>
-
-<div class="card" data-search="satelit orbit gravitasi">
-<div class="card-header"><span class="card-num">34</span><span>Satelit</span></div>
-<div class="card-formula">$$v = \sqrt{\frac{GM}{R}}, \quad T = 2\pi\sqrt{\frac{R^3}{GM}}$$</div>
-<div class="card-desc">Gaya gravitasi = gaya sentripetal.</div>
-<details class="card-example"><summary>Contoh</summary><p>R=6,61×10⁶, M=5,97×10²⁴ → v=7,76×10³ m/s.</p></details>
-</div>
-
-<div class="card" data-search="tikungan datar gesek">
-<div class="card-header"><span class="card-num">35</span><span>Tikungan Datar</span></div>
-<div class="card-formula">$$v_{\max} = \sqrt{\mu g R}$$</div>
-<div class="card-desc">Agar mobil tidak selip.</div>
-<details class="card-example"><summary>Contoh</summary><p>μ=0,7, R=40 → v=16,6 m/s.</p></details>
-</div>
-
-<div class="card" data-search="tegangan tali lingkaran vertikal">
-<div class="card-header"><span class="card-num">36</span><span>Tegangan Tali Vertikal</span></div>
-<div class="card-formula">Bawah: $T = mg + \frac{mv^2}{R}$<br>Atas: $T = \frac{mv^2}{R} - mg$<br>$v_{\min} = \sqrt{gR}$</div>
-<div class="card-desc">Di bawah paling tegang.</div>
-<details class="card-example"><summary>Contoh</summary><p>m=0,1 kg, R=2 m, v=2 → T bawah=1,18 N.</p></details>
-</div>
-
-</div>
-
-<h2 class="chapter-title" data-bab="bab4">🌊 Bab 4 — Gelombang & Bunyi</h2>
-<div class="cards-grid" data-bab="bab4">
-
-<div class="card" data-search="kecepatan gelombang lambda f">
-<div class="card-header"><span class="card-num">37</span><span>Kecepatan Gelombang</span></div>
-<div class="card-formula">$$v = \frac{\lambda}{T} = \lambda f$$</div>
-<div class="card-desc">Rambat = λ × f.</div>
-<details class="card-example"><summary>Contoh</summary><p>λ=1,6 m, f=2 Hz → v=3,2 m/s.</p></details>
-</div>
-
-<div class="card" data-search="frekuensi sudut bilangan gelombang">
-<div class="card-header"><span class="card-num">38</span><span>ω dan k</span></div>
-<div class="card-formula">$$\omega = \frac{2\pi}{T} = 2\pi f, \quad k = \frac{2\pi}{\lambda}, \quad v = \frac{\omega}{k}$$</div>
-<div class="card-desc">Parameter gelombang.</div>
-<details class="card-example"><summary>Contoh</summary><p>T=0,4 → ω=5π. v=4 → k=5π/4.</p></details>
-</div>
-
-<div class="card" data-search="persamaan gelombang sinusoidal">
-<div class="card-header"><span class="card-num">39</span><span>Persamaan Gelombang</span></div>
-<div class="card-formula">$$y = A\cos(\omega t - kx + \varphi_0)$$</div>
-<div class="card-desc">Minus = ke kanan, plus = ke kiri.</div>
-<details class="card-example"><summary>Contoh</summary><p>A=0,1, ω=5π, k=5π/4, φ=-π.</p></details>
-</div>
-
-<div class="card" data-search="persamaan diferensial gelombang">
-<div class="card-header"><span class="card-num">40</span><span>Pers. Diferensial</span></div>
-<div class="card-formula">$$\frac{\partial^2 y}{\partial x^2} - \frac{1}{v^2}\frac{\partial^2 y}{\partial t^2} = 0$$</div>
-<div class="card-desc">Bentuk umum semua gelombang 1D.</div>
-<details class="card-example"><summary>Contoh</summary><p>Untuk gelombang tali, v=√(F/μ).</p></details>
-</div>
-
-<div class="card" data-search="gelombang tali tegangan">
-<div class="card-header"><span class="card-num">41</span><span>Gelombang Tali</span></div>
-<div class="card-formula">$$v = \sqrt{\frac{F_T}{\mu}}, \quad \mu = \frac{m}{L}$$</div>
-<div class="card-desc">F_T=N, μ=kg/m.</div>
-<details class="card-example"><summary>Contoh</summary><p>F=150, m=0,55, L=30 → v=90,5 m/s.</p></details>
-</div>
-
-<div class="card" data-search="gelombang zat padat modulus young">
-<div class="card-header"><span class="card-num">42</span><span>Zat Padat</span></div>
-<div class="card-formula">$$v = \sqrt{\frac{Y}{\rho}}$$</div>
-<div class="card-desc">Y=modulus Young.</div>
-<details class="card-example"><summary>Contoh</summary><p>Baja: v=5,1×10³ m/s.</p></details>
-</div>
-
-<div class="card" data-search="gelombang fluida modulus bulk">
-<div class="card-header"><span class="card-num">43</span><span>Fluida</span></div>
-<div class="card-formula">$$v = \sqrt{\frac{B}{\rho}}$$</div>
-<div class="card-desc">B=modulus bulk.</div>
-<details class="card-example"><summary>Contoh</summary><p>Air laut: v≈1393 m/s.</p></details>
-</div>
-
-<div class="card" data-search="gelombang air dangkal">
-<div class="card-header"><span class="card-num">44</span><span>Air Dangkal</span></div>
-<div class="card-formula">$$v = \sqrt{gd}$$</div>
-<div class="card-desc">d=kedalaman. Untuk prediksi tsunami.</div>
-<details class="card-example"><summary>Contoh</summary><p>d=50 m → v=22 m/s = 80 km/jam.</p></details>
-</div>
-
-<div class="card" data-search="kecepatan bunyi udara suhu">
-<div class="card-header"><span class="card-num">45</span><span>Bunyi di Udara</span></div>
-<div class="card-formula">$$v = (331 + 0{,}6T) \text{ m/s}$$</div>
-<div class="card-desc">T dalam °C.</div>
-<details class="card-example"><summary>Contoh</summary><p>30°C → v=349 m/s.</p></details>
-</div>
-
-<div class="card" data-search="intensitas gelombang daya luas">
-<div class="card-header"><span class="card-num">46</span><span>Intensitas</span></div>
-<div class="card-formula">$$I = \frac{P}{A}$$</div>
-<div class="card-desc">W/m².</div>
-<details class="card-example"><summary>Contoh</summary><p>10 W, R=5 m → I=0,03 W/m².</p></details>
-</div>
-
-<div class="card" data-search="intensitas bola r2">
-<div class="card-header"><span class="card-num">47</span><span>Intensitas Bola</span></div>
-<div class="card-formula">$$I = \frac{P}{4\pi r^2} \propto \frac{1}{r^2}$$</div>
-<div class="card-desc">2× jauh → 1/4 intensitas.</div>
-<details class="card-example"><summary>Contoh</summary><p>30m→100dB, 90m→90,5dB.</p></details>
-</div>
-
-<div class="card" data-search="level intensitas desibel log">
-<div class="card-header"><span class="card-num">48</span><span>Level Intensitas</span></div>
-<div class="card-formula">$$\beta = 10\log\left(\frac{I}{I_0}\right), \quad I_0 = 10^{-12}$$</div>
-<div class="card-desc">dB. Ambang pendengaran 0, sakit 120.</div>
-<details class="card-example"><summary>Contoh</summary><p>I=10⁻⁵ → β=70 dB.</p></details>
-</div>
-
-<div class="card" data-search="beda fase">
-<div class="card-header"><span class="card-num">49</span><span>Beda Fase</span></div>
-<div class="card-formula">$$\Delta\varphi = 2\pi\frac{\Delta x}{\lambda} = 2\pi\frac{\Delta t}{T}$$</div>
-<div class="card-desc">Sefase jika Δφ=2πn.</div>
-<details class="card-example"><summary>Contoh</summary><p>Δx=0,4, λ=1,6 → Δφ=π/2.</p></details>
-</div>
-
-<div class="card" data-search="mach supersonik">
-<div class="card-header"><span class="card-num">50</span><span>Sudut Mach</span></div>
-<div class="card-formula">$$\sin\theta = \frac{v}{u}, \quad \text{Mach} = \frac{u}{v}$$</div>
-<div class="card-desc">u=kecepatan benda.</div>
-<details class="card-example"><summary>Contoh</summary><p>Mach 2,3, v=310 → θ=25,8°.</p></details>
-</div>
-
-<div class="card" data-search="pantulan usg impedansi">
-<div class="card-header"><span class="card-num">51</span><span>Koefisien Pantulan USG</span></div>
-<div class="card-formula">$$R = \frac{Z_2 - Z_1}{Z_1 + Z_2}$$</div>
-<div class="card-desc">Gel untuk mencocokkan impedansi.</div>
-<details class="card-example"><summary>Contoh</summary><p>Z_udara << Z_tubuh → hampir semua dipantulkan.</p></details>
-</div>
-
-<div class="card" data-search="prinsip huygens muka gelombang">
-<div class="card-header"><span class="card-num">52</span><span>Prinsip Huygens</span></div>
-<div class="card-formula">Setiap titik muka gelombang → sumber gelombang titik baru</div>
-<div class="card-desc">Menjelaskan pemantulan, pembiasan, difraksi.</div>
-<details class="card-example"><summary>Contoh</summary><p>Gelombang lewat celah → muka melengkung.</p></details>
-</div>
-
-<div class="card" data-search="energi gelombang amplitudo">
-<div class="card-header"><span class="card-num">53</span><span>Energi Gelombang</span></div>
-<div class="card-formula">$$E \propto A^2, \quad I = \tfrac{1}{2}\rho v \omega^2 A^2$$</div>
-<div class="card-desc">Kuadrat amplitudo.</div>
-<details class="card-example"><summary>Contoh</summary><p>A×3 → I×9 → +9,5 dB.</p></details>
-</div>
-
-</div>
-
-<div class="no-result" id="noResult" style="display:none;">😕 Tidak ada rumus yang cocok.</div>
-</main>
-
-<button class="print-btn" onclick="window.print()">🖨️ Print / PDF</button>
-
-<footer>
-  <p>© 2026 — Kartu Rumus Fisika Teknik | Sumber: Mikrajuddin Abdullah (ITB) & Sulwan Dase (PNUP)</p>
-</footer>
 
 <script>
-const searchInput = document.getElementById('search');
-const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.card');
-const chapterTitles = document.querySelectorAll('.chapter-title');
-const grids = document.querySelectorAll('.cards-grid');
-const noResult = document.getElementById('noResult');
-let activeFilter = 'all';
+/* ============ DATA QUIZ ============ */
+const QUIZZES = {
+  'bab1-1': [
+    { q: 'Berapa jumlah besaran pokok dalam SI?', opts: ['5', '6', '7', '8'], ans: 2,
+      fb: 'SI menetapkan 7 besaran pokok.' },
+    { q: 'Satuan SI untuk massa adalah...', opts: ['gram', 'kilogram', 'meter', 'newton'], ans: 1,
+      fb: 'Kilogram (kg) adalah satuan SI untuk massa.' },
+    { q: 'Dimensi gaya adalah...', opts: ['[M][L][T]⁻¹', '[M][L][T]⁻²', '[M][L]²[T]⁻²', '[M][L]⁻¹[T]⁻²'], ans: 1,
+      fb: 'F = m·a → [M][L][T]⁻².' }
+  ],
+  'bab1-2': [
+    { q: 'Dimensi tekanan adalah...', opts: ['[M][L][T]⁻²', '[M][L]⁻¹[T]⁻²', '[M][L]²[T]⁻²', '[M][L]⁻³'], ans: 1,
+      fb: 'P = F/A → [M][L]⁻¹[T]⁻².' },
+    { q: 'Rumus $s = v_0t + \\frac{1}{2}at^2$ konsisten secara dimensi?', opts: ['Ya', 'Tidak', 'Hanya suku 1', 'Hanya suku 2'], ans: 0,
+      fb: 'Semua suku berdimensi [L].' }
+  ],
+  'bab1-3': [
+    { q: 'Konversi 72 km/jam ke m/s adalah...', opts: ['10', '15', '20', '25'], ans: 2,
+      fb: '72/3,6 = 20 m/s.' },
+    { q: 'Awalan "M" (mega) berarti...', opts: ['10³', '10⁶', '10⁹', '10⁻³'], ans: 1,
+      fb: 'Mega = 10⁶.' }
+  ],
+  'bab1-4': [
+    { q: 'Berapa angka penting dari 0,00210?', opts: ['2', '3', '4', '5'], ans: 1,
+      fb: 'Nol di depan tidak penting, 2-1-0 = 3 AP.' },
+    { q: 'Hasil $3,14 \\times 2,0$ ditulis dengan AP yang benar adalah...', opts: ['6,28', '6,3', '6', '6,280'], ans: 1,
+      fb: 'Paling sedikit AP = 2 → 6,3.' }
+  ],
+  'bab2-1': [
+    { q: 'Manakah yang termasuk vektor?', opts: ['Massa', 'Waktu', 'Kecepatan', 'Suhu'], ans: 2,
+      fb: 'Kecepatan punya besar & arah.' },
+    { q: 'Dua vektor sama jika...', opts: ['Besar sama', 'Arah sama', 'Besar & arah sama', 'Titik tangkap sama'], ans: 2,
+      fb: 'Harus besar dan arah sama.' }
+  ],
+  'bab2-2': [
+    { q: 'Dua vektor 3 N & 4 N tegak lurus. Resultannya...', opts: ['5 N', '7 N', '1 N', '12 N'], ans: 0,
+      fb: '√(3²+4²) = 5 N.' },
+    { q: 'Dua vektor sejajar 5 N & 3 N searah. Resultan = ...', opts: ['2 N', '8 N', '15 N', '√34 N'], ans: 1,
+      fb: 'Kalau searah, tinggal jumlah: 8 N.' }
+  ],
+  'bab2-3': [
+    { q: 'Besar vektor (6, 8) adalah...', opts: ['10', '14', '48', '√14'], ans: 0,
+      fb: '√(36+64) = 10.' },
+    { q: 'Vektor satuan dari A=(3,4) adalah...', opts: ['(3,4)', '(0,6; 0,8)', '(1,1)', '(0,8; 0,6)'], ans: 1,
+      fb: 'Bagi dengan |A|=5 → (0,6; 0,8).' }
+  ],
+  'bab2-4': [
+    { q: 'A=(1,0,0) dan B=(0,1,0). A·B = ...', opts: ['0', '1', 'î', 'ĵ'], ans: 0,
+      fb: 'Karena tegak lurus, hasilnya 0.' },
+    { q: 'A=(2,3) dan B=(4,1). A·B = ...', opts: ['11', '10', '14', '7'], ans: 0,
+      fb: '2·4 + 3·1 = 8+3 = 11.' }
+  ],
+  'bab2-5': [
+    { q: 'î × ĵ = ...', opts: ['î', 'ĵ', 'k̂', '0'], ans: 2,
+      fb: 'î × ĵ = k̂.' },
+    { q: 'Cross product dari vektor sejajar adalah...', opts: ['Nol', 'Maksimum', 'Negatif', 'Besar'], ans: 0,
+      fb: 'sin 0° = 0.' }
+  ],
+  'bab2-6': [
+    { q: 'Perahu 4 m/s timur + arus 3 m/s utara. Resultan = ...', opts: ['5 m/s', '7 m/s', '1 m/s', '12 m/s'], ans: 0,
+      fb: '√(16+9) = 5 m/s.' }
+  ],
+  'bab3-1': [
+    { q: '1 putaran = ... rad', opts: ['π', '2π', 'π/2', '4π'], ans: 1,
+      fb: '1 putaran = 2π rad.' },
+    { q: 'Roda 60 rpm, ω = ...', opts: ['π rad/s', '2π rad/s', '60 rad/s', 'π/60 rad/s'], ans: 1,
+      fb: 'ω = 60·2π/60 = 2π rad/s.' }
+  ],
+  'bab3-2': [
+    { q: 'Hubungan v & ω adalah...', opts: ['v = ω/R', 'v = ωR', 'v = ω²R', 'v = R/ω'], ans: 1,
+      fb: 'v = ωR.' },
+    { q: 'Bola R=2 m, ω=5 rad/s. v = ...', opts: ['2,5 m/s', '5 m/s', '10 m/s', '20 m/s'], ans: 2,
+      fb: 'v = ωR = 5·2 = 10 m/s.' }
+  ],
+  'bab3-3': [
+    { q: 'Pada GMB (laju konstan), a_T = ...', opts: ['0', '≠0', '∞', 'Negatif'], ans: 0,
+      fb: 'Kalau laju konstan, a_T = 0.' },
+    { q: 'a_R disebut juga percepatan...', opts: ['Tangensial', 'Sentripetal', 'Total', 'Sudut'], ans: 1,
+      fb: 'Sentripetal = menuju pusat.' }
+  ],
+  'bab3-4': [
+    { q: 'Gaya sentripetal selalu mengarah...', opts: ['Keluar pusat', 'Ke pusat', 'Menyinggung', 'Ke atas'], ans: 1,
+      fb: 'Ke pusat lingkaran.' },
+    { q: 'F = mω²R. Jika ω 2× lebih besar, F menjadi...', opts: ['2×', '4×', '8×', '1/2×'], ans: 1,
+      fb: 'Karena ω², jadi 4×.' }
+  ],
+  'bab3-5': [
+    { q: 'v_min di titik atas lingkaran vertikal = ...', opts: ['√(gR)', '√(2gR)', 'gR', '0'], ans: 0,
+      fb: 'v_min = √(gR).' },
+    { q: 'Satelit lebih jauh dari Bumi, kecepatannya...', opts: ['Lebih besar', 'Lebih kecil', 'Sama', 'Nol'], ans: 1,
+      fb: 'v = √(GM/R), semakin besar R → v kecil.' }
+  ],
+  'bab4-1': [
+    { q: 'Gelombang bunyi termasuk...', opts: ['Transversal', 'Longitudinal', 'Elektromagnetik', 'Cahaya'], ans: 1,
+      fb: 'Bunyi = longitudinal.' },
+    { q: 'Cahaya termasuk gelombang...', opts: ['Mekanik', 'Elektromagnetik', 'Longitudinal', 'Bunyi'], ans: 1,
+      fb: 'Cahaya = elektromagnetik, tidak butuh medium.' }
+  ],
+  'bab4-2': [
+    { q: 'v = λ·f. Jika f = 4 Hz, λ = 0,5 m. v = ...', opts: ['0,5', '2', '4', '8'], ans: 1,
+      fb: 'v = 0,5·4 = 2 m/s.' },
+    { q: 'Periode T = 0,2 s. Frekuensi = ...', opts: ['0,2 Hz', '2 Hz', '5 Hz', '20 Hz'], ans: 2,
+      fb: 'f = 1/T = 5 Hz.' }
+  ],
+  'bab4-3': [
+    { q: 'Persamaan y = A cos(ωt - kx) merambat ke...', opts: ['Kiri', 'Kanan', 'Atas', 'Bawah'], ans: 1,
+      fb: 'Tanda minus = ke kanan.' },
+    { q: 'k = 2π/λ. Jika λ = 0,5 m, k = ...', opts: ['π', '2π', '4π', 'π/2'], ans: 2,
+      fb: 'k = 2π/0,5 = 4π.' }
+  ],
+  'bab4-4': [
+    { q: 'Kecepatan gelombang tali bergantung pada...', opts: ['Warna tali', 'Tegangan & massa jenis', 'Panjang saja', 'Suhu'], ans: 1,
+      fb: 'v = √(F_T/μ).' },
+    { q: 'Kecepatan bunyi di udara pada 20°C ≈ ...', opts: ['300 m/s', '331 m/s', '343 m/s', '500 m/s'], ans: 2,
+      fb: 'v = 331 + 0,6·20 = 343 m/s.' }
+  ],
+  'bab4-5': [
+    { q: 'Intensitas gelombang bola berbanding...', opts: ['1/r', '1/r²', 'r', 'r²'], ans: 1,
+      fb: 'I = P/(4πr²) → 1/r².' },
+    { q: 'Jika jarak 2× lebih jauh, intensitas menjadi...', opts: ['2×', '1/2×', '4×', '1/4×'], ans: 3,
+      fb: 'Karena 1/r², jadi 1/4×.' }
+  ],
+  'bab4-6': [
+    { q: 'Frekuensi audiosonik manusia...', opts: ['< 20 Hz', '20-20.000 Hz', '> 20.000 Hz', '> 1 GHz'], ans: 1,
+      fb: '20 Hz – 20 kHz.' },
+    { q: 'Ambang pendengaran I₀ = ...', opts: ['10⁻¹² W/m²', '10⁻⁶ W/m²', '1 W/m²', '10⁻³ W/m²'], ans: 0,
+      fb: 'I₀ = 10⁻¹² W/m².' }
+  ],
+  'bab4-7': [
+    { q: 'Ambulans mendekat, frekuensi terdengar...', opts: ['Lebih tinggi', 'Lebih rendah', 'Sama', 'Nol'], ans: 0,
+      fb: 'Mendekat → frekuensi lebih tinggi (Doppler).' },
+    { q: 'Bilangan Mach = ...', opts: ['v/u', 'u/v', 'uv', 'v²/u'], ans: 1,
+      fb: 'Mach = u/v (kecepatan benda / kecepatan bunyi).' }
+  ],
+  'bab4-8': [
+    { q: 'Prinsip Huygens menjelaskan...', opts: ['Gravitasi', 'Pemantulan, pembiasan, difraksi', 'Magnet', 'Listrik'], ans: 1,
+      fb: 'Tiga fenomena gelombang itu.' },
+    { q: 'Gel USG digunakan untuk...', opts: ['Memanaskan', 'Mendinginkan', 'Mencocokkan impedansi', 'Mewarnai'], ans: 2,
+      fb: 'Gel mengurangi pemantulan di batas udara-kulit.' }
+  ]
+};
 
-function applyFilters() {
-  const query = searchInput.value.toLowerCase().trim();
-  let visibleCount = 0;
-  const visibleChapters = new Set();
-
-  cards.forEach(card => {
-    const text = (card.dataset.search || '') + ' ' + card.textContent.toLowerCase();
-    const bab = card.closest('.cards-grid').dataset.bab;
-    const matchSearch = !query || text.includes(query);
-    const matchFilter = activeFilter === 'all' || activeFilter === bab;
-
-    if (matchSearch && matchFilter) {
-      card.style.display = '';
-      visibleCount++;
-      visibleChapters.add(bab);
-    } else {
-      card.style.display = 'none';
-    }
+/* ============ RENDER QUIZ ============ */
+Object.keys(QUIZZES).forEach(key => {
+  const el = document.querySelector(`.quiz[data-quiz="${key}"]`);
+  if (!el) return;
+  let html = '<h4>🎯 Uji Pemahaman</h4>';
+  QUIZZES[key].forEach((item, idx) => {
+    html += `<div class="quiz-question" data-q="${key}-${idx}">
+      <div class="quiz-q-text">${idx+1}. ${item.q}</div>`;
+    item.opts.forEach((opt, oi) => {
+      html += `<button class="quiz-option" data-ans="${oi}" data-correct="${item.ans}" data-qid="${key}-${idx}">${String.fromCharCode(65+oi)}. ${opt}</button>`;
+    });
+    html += `<div class="quiz-feedback" style="display:none;">${item.fb}</div></div>`;
   });
-
-  chapterTitles.forEach(t => {
-    t.style.display = visibleChapters.has(t.dataset.bab) ? '' : 'none';
-  });
-  grids.forEach(g => {
-    g.style.display = visibleChapters.has(g.dataset.bab) ? '' : 'none';
-  });
-  noResult.style.display = visibleCount === 0 ? '' : 'none';
-
-  if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise();
-  }
-}
-
-searchInput.addEventListener('input', applyFilters);
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeFilter = btn.dataset.filter;
-    applyFilters();
-  });
+  el.innerHTML = html;
 });
 
+/* ============ QUIZ INTERACTION ============ */
+document.addEventListener('click', e => {
+  if (!e.target.classList.contains('quiz-option')) return;
+  const btn = e.target;
+  const qid = btn.dataset.qid;
+  const question = btn.closest('.quiz-question');
+  if (question.dataset.answered === '1') return;
+  const correct = parseInt(btn.dataset.correct);
+  const chosen = parseInt(btn.dataset.ans);
+  question.querySelectorAll('.quiz-option').forEach(b => {
+    const bAns = parseInt(b.dataset.ans);
+    if (bAns === correct) b.classList.add('correct');
+    else if (bAns === chosen) b.classList.add('wrong');
+  });
+  question.querySelector('.quiz-feedback').style.display = 'block';
+  question.dataset.answered = '1';
+});
+
+/* ============ SEARCH ============ */
+const searchInput = document.getElementById('search');
+const noResult = document.getElementById('noResult');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+  document.querySelectorAll('.topic').forEach(topic => {
+    const text = (topic.dataset.search || '') + ' ' + topic.textContent.toLowerCase();
+    if (!q || text.includes(q)) {
+      topic.classList.remove('hidden');
+      visible++;
+    } else {
+      topic.classList.add('hidden');
+    }
+  });
+  // Hide sections with no visible topics
+  document.querySelectorAll('.section').forEach(sec => {
+    const hasVisible = sec.querySelectorAll('.topic:not(.hidden)').length > 0;
+    sec.classList.toggle('hidden', !hasVisible);
+  });
+  noResult.style.display = visible === 0 ? 'block' : 'none';
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+});
+
+/* ============ DARK MODE ============ */
 const darkToggle = document.getElementById('darkToggle');
-if (localStorage.getItem('theme') === 'dark') {
+if (localStorage.getItem('ft_theme') === 'dark') {
   document.body.classList.add('dark');
   darkToggle.textContent = '☀️';
 }
@@ -615,7 +1571,61 @@ darkToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   const isDark = document.body.classList.contains('dark');
   darkToggle.textContent = isDark ? '☀️' : '🌙';
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  localStorage.setItem('ft_theme', isDark ? 'dark' : 'light');
+});
+
+/* ============ PROGRESS TRACKING ============ */
+const DONE_KEY = 'ft_progress';
+let done = JSON.parse(localStorage.getItem(DONE_KEY) || '{}');
+const totalTopics = document.querySelectorAll('.done-toggle').length;
+
+function updateProgress() {
+  const doneCount = Object.values(done).filter(Boolean).length;
+  const pct = Math.round(doneCount / totalTopics * 100);
+  document.getElementById('progressText').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+document.querySelectorAll('.done-toggle').forEach(btn => {
+  const topic = btn.dataset.topic;
+  if (done[topic]) {
+    btn.classList.add('checked');
+    btn.textContent = '✓ Selesai';
+    document.querySelector(`.nav-link[data-topic="${topic}"]`)?.classList.add('done');
+  }
+  btn.addEventListener('click', () => {
+    done[topic] = !done[topic];
+    btn.classList.toggle('checked', done[topic]);
+    btn.textContent = done[topic] ? '✓ Selesai' : '☐ Tandai selesai';
+    document.querySelector(`.nav-link[data-topic="${topic}"]`)?.classList.toggle('done', done[topic]);
+    localStorage.setItem(DONE_KEY, JSON.stringify(done));
+    updateProgress();
+  });
+});
+updateProgress();
+
+/* ============ SIDEBAR TOGGLE (MOBILE) ============ */
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+/* ============ ACTIVE NAV HIGHLIGHT ============ */
+const sections = document.querySelectorAll('.topic');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < 150) current = sec.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.dataset.topic === current);
+  });
 });
 </script>
 
